@@ -1,0 +1,110 @@
+<app-navbar />
+<script src="https://accounts.google.com/gsi/client" async></script>
+<section class="p-3 p-md-4 p-xl-5">
+  <div class="container">
+    <div class="card border-light-subtle shadow-sm">
+      <div class="row g-0">
+        <div class="col-12 col-md-6 text-bg-primary">
+          <div class="d-flex align-items-center justify-content-center h-100">
+            <div class="col-10 col-xl-8 py-3">
+              <img
+                class="img-fluid rounded mb-4"
+                loading="lazy"
+                src="./../../../assets/images.png"
+                width="245"
+                height="80"
+                alt="BootstrapBrain Logo"
+              />
+              <hr class="border-primary-subtle mb-4" />
+              <h2 class="h1 mb-4">
+                Join And Explore Our Exclusive Tour Options
+              </h2>
+              <p class="lead m-0">
+                We are commited to offer the best tour service for all around
+                bangladesh
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="card-body p-3 p-md-4 p-xl-5">
+            <div class="row">
+              <div class="col-12">
+                <div class="mb-5">
+                  <h2 class="h3">Registration</h2>
+                  <h3 class="fs-6 fw-normal text-secondary m-0">
+                    Enter your details to register
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <form action="#!">
+              <div class="row gy-3 gy-md-4 overflow-hidden">
+                <div class="col-12">
+                  <mat-form-field appearance="fill" class="form">
+                    <mat-label>Enter Your Firstname</mat-label>
+                    <input matInput placeholder="Ex: Abraham" />
+                    <mat-icon matSuffix>tag_faces</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div class="col-12">
+                  <mat-form-field appearance="fill" class="form">
+                    <mat-label>Enter Your Lastname</mat-label>
+                    <input matInput placeholder="Ex: Linkcon" />
+                    <mat-icon matSuffix>tag_faces</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div class="col-12">
+                  <mat-form-field appearance="fill" class="form">
+                    <mat-label>Enter Your Email</mat-label>
+                    <input matInput placeholder="Ex: test@gmail.com" />
+                    <mat-icon matSuffix>email</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div class="col-12">
+                  <mat-form-field appearance="fill" class="form">
+                    <mat-label>Enter A Password</mat-label>
+                    <input type="password" matInput placeholder="Ex: 1234" />
+                    <mat-icon matSuffix>password</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div class="col-12">
+                  <div class="d-grid">
+                    <button mat-raised-button>
+                      <mat-icon>arrow_right_alt</mat-icon>
+                      Sign Up
+                    </button>
+                    <br />
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="row">
+              <div class="col-12">
+                <hr class="mt-5 mb-4 border-secondary-subtle" />
+                <p class="m-0 text-secondary text-center">
+                  Already have an account?
+                  <a
+                    routerLink="/login"
+                    href="#!"
+                    class="link-primary text-decoration-none"
+                    >Sign in</a
+                  >
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <p class="mt-5 mb-4">Or continue with</p>
+                <div class="d-flex gap-3 flex-column flex-xl-row">
+                  <asl-google-signin-button type="standard" size="medium">
+                  </asl-google-signin-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

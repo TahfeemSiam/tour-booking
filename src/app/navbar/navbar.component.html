@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-sm nav-color">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">
+      <img
+        src="./../../assets/images.png"
+        alt="Avatar Logo"
+        style="width: 40px"
+        class="rounded-pill"
+      />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mynavbar"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <button routerLink="/" mat-button>
+            Home <mat-icon>home</mat-icon>
+          </button>
+        </li>
+        <li class="nav-item">
+          <button mat-button [matMenuTriggerFor]="menu">
+            Menu <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+          </mat-menu>
+        </li>
+        <li class="nav-item">
+          <button mat-button [matMenuTriggerFor]="menu2">
+            Users <mat-icon>person</mat-icon>
+          </button>
+          <mat-menu #menu2="matMenu">
+            <button routerLink="/login" mat-menu-item>
+              <mat-icon>login </mat-icon> Login
+            </button>
+            <button routerLink="/register" mat-menu-item>
+              <mat-icon>group_add</mat-icon> Register
+            </button>
+          </mat-menu>
+        </li>
+        <li class="nav-item">
+          <button mat-button routerLink="/contact">
+            Contact Us <mat-icon>message</mat-icon>
+          </button>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="text" placeholder="Search" />
+        <button mat-flat-button><mat-icon>search</mat-icon> Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
