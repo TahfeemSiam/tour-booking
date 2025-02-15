@@ -21,3 +21,25 @@ exports.sendContactInfo = (req, res) => {
     }
   );
 };
+
+exports.storeUserInfo = (req, res) => {
+  const query =
+    "INSERT INTO users (firstname, lastname, email, gender, user_role) VALUES (?, ?, ?, ?, ?)";
+  database.query(
+    query,
+    [
+      req.body.firstname,
+      req.body.lastname,
+      req.body.email,
+      req.body.gender,
+      req.body.user_role,
+    ],
+    function (err, result) {
+      if (err) throw err;
+      res.status(201).json({
+        message: "User Record Created Successfully",
+        data: result,
+      });
+    }
+  );
+};

@@ -1,0 +1,157 @@
+<div class="container">
+  <h2 class="text-center text-info">Insert Tour Info</h2>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6 pb-5">
+      <form
+        #f="ngForm"
+        (ngSubmit)="submitCreateTour(f)"
+        enctype="multipart/form-data"
+      >
+        <mat-card class="card rounded-0">
+          <mat-card-header class="card-header p-0">
+            <div
+              style="width: 100%"
+              class="bg-secondary text-white text-center py-2"
+            >
+              <h3><mat-icon>envelope</mat-icon> Create Tour Form</h3>
+              <p class="m-0">Fill Out All Form Fields</p>
+            </div>
+          </mat-card-header>
+          <mat-card-content class="card-body p-3">
+            <div class="form-group">
+              <div class="input-group mb-2">
+                <mat-form-field class="form">
+                  <mat-label>Enter Tour Name</mat-label>
+                  <input
+                    matInput
+                    ngModel
+                    type="text"
+                    required
+                    name="tourname"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group mb-2">
+                <mat-form-field class="form">
+                  <mat-label>Enter Tour Package Price</mat-label>
+                  <input matInput ngModel type="number" required name="price" />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group mb-2">
+                <mat-form-field class="form">
+                  <mat-label>Choose Start Date</mat-label>
+                  <input
+                    required
+                    ngModel
+                    name="start"
+                    matInput
+                    [matDatepicker]="picker"
+                  />
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group mb-2">
+                <mat-form-field class="form">
+                  <mat-label>Choose End Date</mat-label>
+                  <input
+                    required
+                    ngModel
+                    name="end"
+                    matInput
+                    [matDatepicker]="picker2"
+                  />
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="picker2"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group mb-2">
+                <mat-form-field class="form">
+                  <mat-label>Select Tour Location</mat-label>
+                  <mat-select ngModel name="location" required>
+                    <mat-option value="one">First option</mat-option>
+                    <mat-option value="two">Second option</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group mb-2">
+                <mat-form-field class="form">
+                  <mat-label>Write A Tour Description</mat-label>
+                  <textarea
+                    required
+                    ngModel
+                    name="description"
+                    rows="10"
+                    matInput
+                  ></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group mb-2">
+                <label class="btn btn-danger shadow form" for="image"
+                  >Upload Images</label
+                >
+                <input
+                  #Image
+                  ngModel
+                  id="image"
+                  name="image"
+                  type="file"
+                  multiple
+                  required
+                  (change)="handleFileInput($any($event).target.files)"
+                  style="display: none"
+                />
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button
+                [disabled]="!f.valid || checkImgLenght < 4"
+                class="form btn-clr"
+                mat-fab
+                extended
+              >
+                <mat-icon>note_add</mat-icon>
+                Submit
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </form>
+      <!--Form with header-->
+    </div>
+  </div>
+</div>
+
+<!-- <input
+  #Image
+  type="file"
+  multiple
+  (change)="handleFileInput($any($event).target.files)"
+/> -->
+<img width="100%" *ngIf="imageUrl" [src]="imageUrl" class="image" />

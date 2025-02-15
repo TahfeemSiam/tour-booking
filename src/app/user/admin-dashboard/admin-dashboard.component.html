@@ -1,0 +1,47 @@
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="over">
+    <p>Auto-resizing sidenav</p>
+    <button routerLink="/" mat-raised-button class="button">Home</button>
+    <br />
+    <br />
+    <button routerLink="/admin/createTour" mat-raised-button class="button">
+      Create A Tour
+    </button>
+    <br />
+    <br />
+    <button routerLink="/admin/tourLists" mat-raised-button class="button">
+      List Of Tours
+    </button>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <mat-toolbar style="background-color: #c7ecee">
+      <button
+        mat-icon-button
+        style="color: #535c68"
+        class="example-icon"
+        aria-label="Example icon-button with menu icon"
+        (click)="drawer.toggle()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span style="color: #535c68">Admin Dashboard</span>
+      <span class="example-spacer"></span>
+      <button
+        mat-icon-button
+        class="example-icon favorite-icon"
+        aria-label="Example icon-button with heart icon"
+      >
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="example-icon"
+        aria-label="Example icon-button with share icon"
+      >
+        <mat-icon>share</mat-icon>
+      </button>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>

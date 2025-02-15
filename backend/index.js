@@ -4,10 +4,12 @@ const cors = require("cors");
 const { OAuth2Client } = require("google-auth-library");
 const client = new OAuth2Client();
 const userRouter = require("./routers/userRouter");
+const tourRouter = require("./routers/tourRouter");
 server.use(express.json());
 server.use(cors());
 
 server.use("/user", userRouter);
+server.use("/tour", tourRouter);
 
 server.post("/verify", (req, res) => {
   const token = req.headers.token;

@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { AngularMaterialModule } from '../../angular-material/angular-material.module';
 import { RouterModule } from '@angular/router';
-import {
-  GoogleSigninButtonModule,
-  SocialAuthService,
-} from '@abacritt/angularx-social-login';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { FormsModule, NgForm } from '@angular/forms';
+import { UserService } from '../user.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -15,31 +14,36 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
     RouterModule,
     AngularMaterialModule,
     GoogleSigninButtonModule,
+    FormsModule,
+    CommonModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent implements OnInit {
-  constructor(
-    private authService: SocialAuthService,
-    private http: HttpClient
-  ) {}
-  token!: string;
+  userService = inject(UserService);
+  error: boolean = false;
+  errMsg!: string;
+  signingIn: boolean = false;
+
   ngOnInit(): void {
-    this.authService.authState.subscribe((user) => {
-      this.token = user.idToken;
-      console.log(user);
-      console.log(this.token);
-      console.log(document.cookie);
-      const httpHeaders: HttpHeaders = new HttpHeaders({
-        token: this.token,
-      });
-      this.http
-        .post('http://localhost:5000/verify', {}, { headers: httpHeaders })
-        .subscribe({
-          next: (res) => console.log(res),
-          error: (err) => console.log(err),
-        });
+    this.userService.signInUsingGoogle();
+
+    this.userService.invalidLoginCredentials.subscribe((res) => {
+      this.error = true;
     });
+
+    this.userService.invalidLoginCredentialsMsg.subscribe((res) => {
+      this.errMsg = res;
+    });
+
+    this.userService.userSigningIn.subscribe((res) => {
+      this.signingIn = res;
+    });
+  }
+
+  signIn(form: NgForm) {
+    this.signingIn = true;
+    this.userService.firebaseSignIn(form);
   }
 }

@@ -38,41 +38,83 @@
                 </div>
               </div>
             </div>
-            <form action="#!">
+            <form #f="ngForm" (ngSubmit)="signUp(f)">
               <div class="row gy-3 gy-md-4 overflow-hidden">
                 <div class="col-12">
                   <mat-form-field appearance="fill" class="form">
                     <mat-label>Enter Your Firstname</mat-label>
-                    <input matInput placeholder="Ex: Abraham" />
+                    <input
+                      ngModel
+                      name="firstname"
+                      type="text"
+                      required
+                      matInput
+                      placeholder="Ex: Abraham"
+                    />
                     <mat-icon matSuffix>tag_faces</mat-icon>
                   </mat-form-field>
                 </div>
                 <div class="col-12">
                   <mat-form-field appearance="fill" class="form">
                     <mat-label>Enter Your Lastname</mat-label>
-                    <input matInput placeholder="Ex: Linkcon" />
+                    <input
+                      ngModel
+                      name="lastname"
+                      type="text"
+                      required
+                      matInput
+                      placeholder="Ex: Linkcon"
+                    />
                     <mat-icon matSuffix>tag_faces</mat-icon>
                   </mat-form-field>
                 </div>
                 <div class="col-12">
                   <mat-form-field appearance="fill" class="form">
                     <mat-label>Enter Your Email</mat-label>
-                    <input matInput placeholder="Ex: test@gmail.com" />
+                    <input
+                      ngModel
+                      name="email"
+                      type="email"
+                      required
+                      matInput
+                      placeholder="Ex: test@gmail.com"
+                    />
                     <mat-icon matSuffix>email</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div class="col-12">
+                  <mat-form-field class="form">
+                    <mat-label>Select Your Gender</mat-label>
+                    <mat-select ngModel name="gender" required>
+                      <mat-option value="Male">Male</mat-option>
+                      <mat-option value="Female">Female</mat-option>
+                    </mat-select>
                   </mat-form-field>
                 </div>
                 <div class="col-12">
                   <mat-form-field appearance="fill" class="form">
                     <mat-label>Enter A Password</mat-label>
-                    <input type="password" matInput placeholder="Ex: 1234" />
+                    <input
+                      ngModel
+                      name="password"
+                      type="password"
+                      type="password"
+                      required
+                      matInput
+                      placeholder="Ex: 123456"
+                      minlength="6"
+                    />
                     <mat-icon matSuffix>password</mat-icon>
                   </mat-form-field>
                 </div>
                 <div class="col-12">
                   <div class="d-grid">
-                    <button mat-raised-button>
+                    <button
+                      [disabled]="!f.valid || userRegistering"
+                      mat-raised-button
+                    >
                       <mat-icon>arrow_right_alt</mat-icon>
-                      Sign Up
+                      {{ !userRegistering ? "Sign Up" : "Signing Up..." }}
                     </button>
                     <br />
                   </div>

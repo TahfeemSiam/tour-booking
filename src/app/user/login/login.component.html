@@ -15,25 +15,45 @@
                 </div>
               </div>
             </div>
-            <form action="#!">
+            <form #f="ngForm" (ngSubmit)="signIn(f)">
               <div class="row gy-3 overflow-hidden">
                 <div class="col-12">
                   <mat-form-field class="form" appearance="outline">
                     <mat-label>Enter Your Email</mat-label>
-                    <input matInput placeholder="Ex: test@gmail.com" />
+                    <input
+                      type="email"
+                      ngModel
+                      required
+                      name="email"
+                      matInput
+                      placeholder="Ex: test@gmail.com"
+                    />
                     <mat-icon matSuffix>email</mat-icon>
                   </mat-form-field>
                 </div>
                 <div class="col-12">
                   <mat-form-field class="form" appearance="outline">
                     <mat-label>Enter Your Password</mat-label>
-                    <input matInput placeholder="Ex: 1234" />
+                    <input
+                      type="text"
+                      ngModel
+                      name="password"
+                      matInput
+                      required
+                      placeholder="Ex: 123456"
+                      minlength="6"
+                    />
                     <mat-icon matSuffix>password</mat-icon>
                   </mat-form-field>
                 </div>
                 <div class="col-12">
+                  <p *ngIf="error" class="text-danger">{{ errMsg }}</p>
+                </div>
+                <div class="col-12">
                   <div class="d-grid">
-                    <button mat-flat-button>Sign In</button>
+                    <button [disabled]="!f.valid || signingIn" mat-flat-button>
+                      Sign In
+                    </button>
                   </div>
                 </div>
               </div>
