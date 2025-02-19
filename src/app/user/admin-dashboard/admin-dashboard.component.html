@@ -1,16 +1,31 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="over">
-    <p>Auto-resizing sidenav</p>
-    <button routerLink="/" mat-raised-button class="button">Home</button>
+    <p>Admin Menu</p>
+    <button routerLink="/" mat-raised-button class="button">
+      <mat-icon>home</mat-icon> Home
+    </button>
     <br />
     <br />
     <button routerLink="/admin/createTour" mat-raised-button class="button">
+      <mat-icon>edit_note</mat-icon>
       Create A Tour
     </button>
     <br />
     <br />
     <button routerLink="/admin/tourLists" mat-raised-button class="button">
+      <mat-icon>list</mat-icon>
       List Of Tours
+    </button>
+    <br />
+    <br />
+    <button routerLink="/admin/userLists" mat-raised-button class="button">
+      <mat-icon>groups</mat-icon>
+      List Of Users
+    </button>
+    <br />
+    <br />
+    <button mat-raised-button class="button">
+      <mat-icon>logout</mat-icon> Logout
     </button>
   </mat-drawer>
 
@@ -27,20 +42,14 @@
       </button>
       <span style="color: #535c68">Admin Dashboard</span>
       <span class="example-spacer"></span>
-      <button
-        mat-icon-button
-        class="example-icon favorite-icon"
-        aria-label="Example icon-button with heart icon"
-      >
-        <mat-icon>favorite</mat-icon>
+      <button mat-mini-fab [matMenuTriggerFor]="menu">
+        <mat-icon>person_off</mat-icon>
       </button>
-      <button
-        mat-icon-button
-        class="example-icon"
-        aria-label="Example icon-button with share icon"
-      >
-        <mat-icon>share</mat-icon>
-      </button>
+      <mat-menu #menu="matMenu">
+        <button (click)="logout()" mat-menu-item>
+          <mat-icon>logout</mat-icon> logout
+        </button>
+      </mat-menu>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </div>

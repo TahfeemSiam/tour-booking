@@ -1,5 +1,17 @@
 const database = require("./../mysql");
 const Contact = require("./../models/contactModel");
+
+exports.getAllUsers = (req, res) => {
+  const query = "SELECT * FROM users";
+  database.query(query, function (err, result) {
+    if (err) throw err;
+    res.status(201).json({
+      message: "Fetched All Users Data",
+      data: result,
+    });
+  });
+};
+
 exports.sendContactInfo = (req, res) => {
   const query =
     "INSERT INTO contact (fullname, email, phone, message) VALUES (?, ?, ?, ?)";
@@ -42,4 +54,15 @@ exports.storeUserInfo = (req, res) => {
       });
     }
   );
+};
+
+exports.getUserByEmail = (req, res) => {
+  const query = "SELECT firstname, user_role FROM users WHERE email = ?";
+  database.query(query, [req.params.email], function (err, result) {
+    if (err) throw err;
+    res.status(200).json({
+      message: "Got User Successfully",
+      data: result,
+    });
+  });
 };

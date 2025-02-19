@@ -2,7 +2,9 @@ import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { map, Subject } from 'rxjs';
+import { User } from './user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +12,7 @@ import { Subject } from 'rxjs';
 export class UserService {
   http = inject(HttpClient);
   authService = inject(SocialAuthService);
-  token!: string;
+  router = inject(Router);
   userSignUp = new Subject<boolean>();
   invalidLoginCredentials = new Subject<boolean>();
   invalidLoginCredentialsMsg = new Subject<string>();
@@ -18,18 +20,32 @@ export class UserService {
 
   signInUsingGoogle() {
     this.authService.authState.subscribe((user) => {
-      this.token = user.idToken;
-      const httpHeaders: HttpHeaders = new HttpHeaders({
-        token: this.token,
-      });
       this.http
-        .post('http://localhost:5000/verify', {}, { headers: httpHeaders })
-        .subscribe({
-          next: (res) => {
-            console.log(res);
-          },
-          error: (err) => console.log(err),
+        .post('http://localhost:5000/user/register', {
+          firstname: user.firstName,
+          lastname: user.lastName,
+          email: user.email,
+          gender: 'null',
+          user_role: 'user',
+        })
+        .subscribe((res) => {
+          console.log(res);
+          localStorage.setItem('token', user.idToken);
+          localStorage.setItem('firstname', user.firstName);
+          localStorage.setItem('user_role', 'user');
+          this.router.navigate(['/user']);
         });
+      // const httpHeaders: HttpHeaders = new HttpHeaders({
+      //   token: user.idToken,
+      // });
+      // this.http
+      //   .post('http://localhost:5000/verify', {}, { headers: httpHeaders })
+      //   .subscribe({
+      //     next: (res) => {
+      //       console.log(res);
+      //     },
+      //     error: (err) => console.log(err),
+      //   });
     });
   }
 
@@ -41,9 +57,9 @@ export class UserService {
         { email, password }
       )
       .subscribe({
-        next: (res) => {
+        next: (res: any) => {
           console.log(res);
-          this.userSigningIn.next(false);
+          this.getUserByEmail(res.email, res.idToken);
         },
         error: (err) => {
           console.log(err);
@@ -89,5 +105,38 @@ export class UserService {
         },
         error: (err) => console.log(err),
       });
+  }
+
+  getUserByEmail(email: string, token: string) {
+    this.http
+      .get(`http://localhost:5000/user/getUserByEmail/${email}`)
+      .subscribe({
+        next: (res: any) => {
+          console.log(res);
+          if (res.data[0].user_role == 'user') {
+            localStorage.setItem('user_role', res.data[0].user_role);
+            localStorage.setItem('firstname', res.data[0].firstname);
+            localStorage.setItem('token', token);
+            console.log(token);
+            this.router.navigate(['/user']);
+            this.userSigningIn.next(false);
+          } else {
+            localStorage.setItem('user_role', res.data[0].user_role);
+            localStorage.setItem('firstname', res.data[0].firstname);
+            localStorage.setItem('token', token);
+            this.router.navigate(['/admin']);
+            this.userSigningIn.next(false);
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
+
+  getAllUsers() {
+    return this.http
+      .get<User[]>('http://localhost:5000/user/getAllUsers')
+      .pipe(map((res: any) => res.data));
   }
 }

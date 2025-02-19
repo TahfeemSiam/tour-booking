@@ -1,0 +1,13 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.toolbar {
+  background-color: blueviolet;
+  color: aliceblue;
+}
+
+.user-logo {
+  width: 30px;
+  height: 30px;
+}

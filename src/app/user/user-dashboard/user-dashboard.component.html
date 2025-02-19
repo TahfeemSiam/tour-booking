@@ -1,0 +1,13 @@
+<mat-toolbar class="toolbar">
+  <img class="user-logo" src="./../../../assets/icon-5359553_640.webp" />
+  <span>{{ firtname }}</span>
+  <span class="example-spacer"></span>
+  <button mat-mini-fab [matMenuTriggerFor]="menu">
+    <mat-icon>person_off</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button (click)="logout()" mat-menu-item>
+      <mat-icon>logout</mat-icon> logout
+    </button>
+  </mat-menu>
+</mat-toolbar>
