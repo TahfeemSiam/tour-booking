@@ -13,14 +13,18 @@ import { CreateTourComponent } from './user/admin-dashboard/create-tour/create-t
 import { TourListsComponent } from './user/admin-dashboard/tour-lists/tour-lists.component';
 import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.component';
 import { UserListsComponent } from './user/admin-dashboard/user-lists/user-lists.component';
+import { DashboardInfoComponent } from './user/admin-dashboard/dashboard-info/dashboard-info.component';
+import { TourDetailComponent } from './tour/tour-detail/tour-detail.component';
 
 export const routes: Routes = [
   { component: HomeComponent, path: '' },
+  { component: TourDetailComponent, path: 'detail/:id' },
   {
     component: AdminDashboardComponent,
     path: 'admin',
     canActivate: [checkIfValidTokenAdmin],
     children: [
+      { component: DashboardInfoComponent, path: '' },
       { component: CreateTourComponent, path: 'createTour' },
       { component: TourListsComponent, path: 'tourLists' },
       { component: UserListsComponent, path: 'userLists' },

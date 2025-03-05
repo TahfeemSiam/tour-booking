@@ -1,0 +1,32 @@
+<div class="container">
+  <h1 class="text">Packages</h1>
+  <div class="row">
+    <div *ngFor="let tour of tours | async" class="col-md-4">
+      <mat-card class="example-card" appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>{{ tour.tourname }}</mat-card-title>
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="./../../assets/tour images/{{ tour.image1 }}"
+          alt="Photo of a Shiba Inu"
+        />
+        <mat-card-content>
+          <p>
+            {{ tour.description }}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            [routerLink]="['detail', tour.tour_id]"
+            class="button"
+            mat-flat-button
+          >
+            Details
+          </button>
+        </mat-card-actions>
+      </mat-card>
+      <br />
+    </div>
+  </div>
+</div>

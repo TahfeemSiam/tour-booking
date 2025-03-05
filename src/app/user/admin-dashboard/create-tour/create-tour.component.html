@@ -1,4 +1,8 @@
 <div class="container">
+  <mat-progress-bar
+    *ngIf="insertingTour"
+    mode="indeterminate"
+  ></mat-progress-bar>
   <h2 class="text-center text-info">Insert Tour Info</h2>
   <div class="row justify-content-center">
     <div class="col-12 col-md-8 col-lg-6 pb-5">
@@ -112,6 +116,33 @@
 
             <div class="form-group">
               <div class="input-group mb-2">
+                <mat-form-field class="form">
+                  <mat-label>Enter Search Tags</mat-label>
+                  <textarea
+                    required
+                    ngModel
+                    name="search"
+                    rows="5"
+                    matInput
+                  ></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group mb-2">
+                <mat-form-field class="form">
+                  <mat-label>Select A Image Edit Option</mat-label>
+                  <mat-select ngModel name="imageEdit" required>
+                    <mat-option value="none">None</mat-option>
+                    <mat-option value="contrast">Contrast</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group mb-2">
                 <label class="btn btn-danger shadow form" for="image"
                   >Upload Images</label
                 >
@@ -131,13 +162,13 @@
 
             <div class="text-center">
               <button
-                [disabled]="!f.valid || checkImgLenght < 4"
+                [disabled]="!f.valid || checkImgLenght < 4 || insertingTour"
                 class="form btn-clr"
                 mat-fab
                 extended
               >
                 <mat-icon>note_add</mat-icon>
-                Submit
+                {{ insertingTour ? "Creating Tour..." : "Submit" }}
               </button>
             </div>
           </mat-card-content>

@@ -1,0 +1,5 @@
+<app-navbar />
+<br />
+<div *ngFor="let t of tour | async" class="container">
+  <h1 class="name">{{ t.tourname }}</h1>
+</div>

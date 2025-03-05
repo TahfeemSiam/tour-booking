@@ -12,6 +12,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [],
@@ -29,6 +31,8 @@ import { MatTableModule } from '@angular/material/table';
     MatCardModule,
     MatPaginatorModule,
     MatTableModule,
+    MatTabsModule,
+    MatProgressBarModule,
   ],
   exports: [
     MatButtonModule,
@@ -42,6 +46,8 @@ import { MatTableModule } from '@angular/material/table';
     MatDatepickerModule,
     MatCardModule,
     MatTableModule,
+    MatTabsModule,
+    MatProgressBarModule,
   ],
 })
 export class AngularMaterialModule {}

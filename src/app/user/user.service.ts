@@ -20,21 +20,10 @@ export class UserService {
 
   signInUsingGoogle() {
     this.authService.authState.subscribe((user) => {
-      this.http
-        .post('http://localhost:5000/user/register', {
-          firstname: user.firstName,
-          lastname: user.lastName,
-          email: user.email,
-          gender: 'null',
-          user_role: 'user',
-        })
-        .subscribe((res) => {
-          console.log(res);
-          localStorage.setItem('token', user.idToken);
-          localStorage.setItem('firstname', user.firstName);
-          localStorage.setItem('user_role', 'user');
-          this.router.navigate(['/user']);
-        });
+      localStorage.setItem('token', user.idToken);
+      localStorage.setItem('firstname', user.firstName);
+      localStorage.setItem('user_role', 'user');
+      this.router.navigate(['/user']);
       // const httpHeaders: HttpHeaders = new HttpHeaders({
       //   token: user.idToken,
       // });
