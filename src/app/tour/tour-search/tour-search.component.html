@@ -1,8 +1,10 @@
-<div class="container" id="packages">
-  <h1 class="text">Packages</h1>
+<app-navbar />
+
+<div class="container">
+  <h1 class="text">Search Results</h1>
   <div class="row">
     <div *ngFor="let tour of tours | async" class="col-md-4">
-      <mat-card class="example-card" appearance="raised">
+      <mat-card class="example-card" appearance="outlined">
         <mat-card-header>
           <mat-card-title>{{ tour.tourname }}</mat-card-title>
         </mat-card-header>
@@ -36,7 +38,7 @@
         </mat-card-content>
         <mat-card-actions>
           <button
-            [routerLink]="['detail', tour.tour_id]"
+            [routerLink]="['./../../detail', tour.tour_id]"
             class="button"
             mat-flat-button
           >

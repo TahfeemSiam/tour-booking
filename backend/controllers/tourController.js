@@ -1,10 +1,16 @@
 const database = require("./../mysql");
 const Tour = require("./../models/tourModel");
+const Review = require("../models/reviewModel");
+const stripe = require("stripe")(
+  "sk_test_51NPlrWDD1NVJPDTvAMdKy8Fxiq7F8I4kC2gVZFHcA3JszTS0lozpgNdwbsgnOIT7VyNhSjDSCAU1BHKm40CnpTws00uQcSneIh"
+);
+const SSLCommerzPayment = require("sslcommerz-lts");
 var multer = require("multer");
 const fs = require("fs");
 const { promisify } = require("util");
 const unlinkAsync = promisify(fs.unlink);
 const { Jimp } = require("jimp");
+const TourBooking = require("../models/bookingModel");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "src/assets");
@@ -137,6 +143,189 @@ exports.getTourById = (req, res) => {
     if (err) throw err;
     res.status(200).json({
       message: "Fetched All Tour Data Successfully",
+      data: result,
+    });
+  });
+};
+
+exports.searchForTour = (req, res) => {
+  const query = "SELECT * FROM tours WHERE search LIKE ?";
+  const searchValue = `%${req.params.search}%`;
+  database.query(query, [searchValue], function (err, result) {
+    if (err) throw err;
+    res.status(200).json({
+      message: "Fetched All Tour Data Successfully",
+      data: result,
+    });
+  });
+};
+
+exports.countTours = (req, res) => {
+  const query = "SELECT COUNT(tour_id) AS NumberOfTours FROM tours;";
+  database.query(query, function (err, result) {
+    if (err) throw err;
+    res.status(200).json({
+      message: "Number Of Tours",
+      data: result,
+    });
+  });
+};
+
+exports.createTourReview = (req, res) => {
+  const query =
+    "INSERT INTO reviews (tour_id, firstname, review, date) VALUES (?, ?, ?, CURRENT_DATE())";
+  const review = new Review(
+    req.body.tour_id,
+    req.body.firstname,
+    req.body.review,
+    Date.now()
+  );
+  database.query(
+    query,
+    [review.tour_id, review.firstname, review.review],
+    function (err, result) {
+      if (err) throw err;
+      res.status(201).json({
+        message: "Tour Review Created Successfully",
+        data: result,
+      });
+    }
+  );
+};
+
+exports.getATourReviewById = (req, res) => {
+  const query = "SELECT * FROM reviews WHERE tour_id = ?";
+  database.query(query, [req.params.id], function (err, result) {
+    if (err) throw err;
+    res.status(201).json({
+      message: "Fetched Tour Review Successfully",
+      data: result,
+    });
+  });
+};
+
+exports.makePayment = async (req, res) => {
+  //get amount
+  const amount = req.body.amount;
+  const tourName = req.body.tourname;
+  const userId = req.body.userId;
+  const tourId = req.params.id;
+  // const img = req.body.img;
+  try {
+    //create stripe session
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: tourName,
+            },
+            unit_amount: amount * 100,
+          },
+          quantity: 1,
+        },
+      ],
+      mode: "payment",
+      success_url: `http://localhost:4200/success/${tourId}/${userId}/${tourName}/${amount}`,
+      cancel_url: "http://localhost:4200",
+      expand: ["payment_intent"],
+    });
+    return res.status(200).json({
+      message: "Payment Was Successfull",
+      session,
+    });
+  } catch (err) {
+    res.status(404).json({
+      message: "Something went wrong",
+      err,
+    });
+    console.log("stripe error", err);
+  }
+};
+
+exports.makePaymentUsingSslCommerz = (req, res) => {
+  const amount = req.body.amount;
+  const tourName = req.body.name;
+  const data = {
+    total_amount: amount,
+    currency: "USD",
+    tran_id: "REF123", // use unique tran_id for each api call
+    success_url: `http://localhost:4200/detail/${req.params.id}`,
+    fail_url: "http://localhost:3030/fail",
+    cancel_url: "http://localhost:3030/cancel",
+    ipn_url: "http://localhost:3030/ipn",
+    shipping_method: "Courier",
+    product_name: tourName,
+    product_category: "Electronic",
+    product_profile: "general",
+    cus_name: "Customer Name",
+    cus_email: "customer@example.com",
+    cus_add1: "Dhaka",
+    cus_add2: "Dhaka",
+    cus_city: "Dhaka",
+    cus_state: "Dhaka",
+    cus_postcode: "1000",
+    cus_country: "Bangladesh",
+    cus_phone: "01711111111",
+    cus_fax: "01711111111",
+    ship_name: "Customer Name",
+    ship_add1: "Dhaka",
+    ship_add2: "Dhaka",
+    ship_city: "Dhaka",
+    ship_state: "Dhaka",
+    ship_postcode: 1000,
+    ship_country: "Bangladesh",
+  };
+  const sslcz = new SSLCommerzPayment(
+    "desht67dd498e9e027",
+    "desht67dd498e9e027@ssl",
+    false
+  );
+  sslcz.init(data).then((apiResponse) => {
+    // Redirect the user to payment gateway
+    let GatewayPageURL = apiResponse.GatewayPageURL;
+    res.status(200).json({
+      message: "Going to payment page",
+      url: GatewayPageURL,
+    });
+  });
+};
+
+exports.storeBookings = (req, res) => {
+  const query =
+    "INSERT INTO bookings (tour_id, user_id, tourname, price) VALUES (?, ?, ?, ?)";
+  const tourBooking = new TourBooking(
+    req.body.tourId,
+    req.body.userId,
+    req.body.tourname,
+    req.body.amount
+  );
+  database.query(
+    query,
+    [
+      tourBooking.tour_id,
+      tourBooking.user_id,
+      tourBooking.tourname,
+      tourBooking.price,
+    ],
+    function (err, result) {
+      if (err) throw err;
+      res.status(201).json({
+        message: "Tour Booking Created Successfully",
+        data: result,
+      });
+    }
+  );
+};
+
+exports.getBookingsByUserId = (req, res) => {
+  const query = "SELECT * FROM bookings WHERE user_id = ?";
+  database.query(query, [req.params.userId], function (err, result) {
+    if (err) throw err;
+    res.status(200).json({
+      message: "Fetched Tour Bookings",
       data: result,
     });
   });

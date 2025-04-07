@@ -23,6 +23,177 @@
       ><img class="img" src="./../../assets/slides/4.jpg"
     /></swiper-slide>
   </swiper-container>
+  <hr />
 </div>
-<br />
+
+<!-- Hero Section -->
+<div class="container-fluid">
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Discover Your Next Adventure</h1>
+      <p>
+        Explore the best places to travel around in bangladesh at a reasonable
+        price with our packages
+      </p>
+      <a href="#packages" class="btn btn-primary btn-lg">Explore Packages</a>
+    </div>
+  </section>
+</div>
+
+<!-- Text Section -->
+<section class="text-section">
+  <div class="container">
+    <div class="row">
+      <!-- Text Column -->
+      <div class="col-lg-8">
+        <h2 class="title">Why Choose Our Tours?</h2>
+        <p class="description">
+          Our tours are designed to provide unforgettable experiences, from
+          exploring exotic destinations to experiencing local cultures. Whether
+          you're looking for a relaxing vacation or an adventurous trip, we have
+          something for everyone. Join us and let us show you the world!
+        </p>
+
+        <h3 class="title">What We Offer</h3>
+        <p class="description">
+          We provide a wide range of tours, including city sightseeing, nature
+          expeditions, cultural experiences, and luxury travel. All our tours
+          are carefully curated to ensure you get the most out of every
+          destination you visit.
+        </p>
+      </div>
+
+      <!-- Features Column -->
+      <div class="col-lg-4">
+        <h3 class="title">Our Features</h3>
+        <ul class="features-list">
+          <li class="feature-item">
+            <i class="fas fa-check-circle"></i>
+            Expert Guides
+          </li>
+          <li class="feature-item">
+            <i class="fas fa-check-circle"></i>
+            Flexible Itineraries
+          </li>
+          <li class="feature-item">
+            <i class="fas fa-check-circle"></i>
+            Affordable Pricing
+          </li>
+          <li class="feature-item">
+            <i class="fas fa-check-circle"></i>
+            Customizable Packages
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <app-tour />
+
+<!-- Footer Section -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <!-- About Section -->
+      <div class="col-md-3">
+        <h5>About Us</h5>
+        <p>
+          Your gateway to exploring the world's most beautiful destinations.
+          Join us on an unforgettable journey to the most picturesque places on
+          Earth!
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-md-3">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Destinations</a></li>
+          <li><a href="#">Tour Packages</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="col-md-3">
+        <h5>Contact</h5>
+        <ul>
+          <li>Email: contacttourwebsite.com</li>
+          <li>Phone: +1 234 567 890</li>
+          <li>Address: 123 Adventure St, Wanderlust City</li>
+        </ul>
+      </div>
+
+      <!-- Social Media Links -->
+      <div class="col-md-3">
+        <h5>Follow Us</h5>
+        <div class="social-icons">
+          <a href="#" class="fab fa-facebook-f"></a>
+          <a href="#" class="fab fa-twitter"></a>
+          <a href="#" class="fab fa-instagram"></a>
+          <a href="#" class="fab fa-youtube"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="copyright">
+    <p>&copy; 2025 Tour Website. All rights reserved.</p>
+  </div>
+</footer>
+
+<div class="accordion-container">
+  <mat-accordion>
+    <mat-expansion-panel
+      (opened)="panelOpenState.set(true)"
+      (closed)="panelOpenState.set(false)"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>smart_toy</mat-icon>
+          Chatbot
+        </mat-panel-title>
+        <mat-panel-description>
+          {{
+            panelOpenState()
+              ? "You can start chatting now"
+              : "Click here to open the chatbot"
+          }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="d-flex" *ngFor="let m of botReply | async">
+        <p>
+          <mat-icon *ngIf="m.type == 'user'">person</mat-icon>
+          <mat-icon *ngIf="m.type == 'bot'">smart_toy</mat-icon>
+          {{ m.message }}
+        </p>
+      </div>
+      <!-- <div class="d-flex">
+        <p>
+          <mat-icon>person</mat-icon>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
+          quidem et autem ullam, voluptate mollitia voluptatum dolore aliquam
+          tenetur nobis voluptates, nisi dicta esse ratione odit natus
+          distinctio nesciunt ipsam!
+        </p>
+      </div> -->
+      <div class="messages-area">
+        <mat-form-field class="messages-input" appearance="outline">
+          <mat-label>Your message</mat-label>
+          <input
+            [(ngModel)]="message"
+            [ngModelOptions]="{ standalone: true }"
+            matInput
+          />
+          <mat-icon matSuffix>chat</mat-icon>
+        </mat-form-field>
+        <button (click)="sendMessage()" style="margin-bottom: 2px" mat-fab>
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

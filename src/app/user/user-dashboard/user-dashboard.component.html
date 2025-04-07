@@ -1,6 +1,6 @@
 <mat-toolbar class="toolbar">
   <img class="user-logo" src="./../../../assets/icon-5359553_640.webp" />
-  <span>{{ firstname }}</span>
+  <span *ngFor="let u of user | async">{{ u.firstname }}</span>
   <span class="example-spacer"></span>
   <button routerLink="/" mat-mini-fab class="home">
     <mat-icon>home</mat-icon>
@@ -17,7 +17,91 @@
 <br />
 <div class="container">
   <mat-tab-group>
-    <mat-tab label="Your Tour Bookings History"> Content 1 </mat-tab>
-    <mat-tab label="User Information"> Content 2 </mat-tab>
+    <mat-tab label="User Information">
+      <div class="container info-container">
+        <mat-card appearance="raised">
+          <mat-card-content>
+            <form
+              #f="ngForm"
+              (ngSubmit)="updateUserinfo(f)"
+              class="info-content"
+            >
+              <mat-form-field
+                class="user-info"
+                appearance="outline"
+                *ngFor="let u of user | async"
+              >
+                <mat-label>Firstname</mat-label>
+                <input
+                  [(ngModel)]="u.firstname"
+                  name="firstname"
+                  matInput
+                  required
+                  placeholder="Firstname"
+                />
+                <mat-icon matSuffix>tag_faces</mat-icon>
+              </mat-form-field>
+              <mat-form-field
+                class="user-info"
+                appearance="outline"
+                *ngFor="let u of user | async"
+              >
+                <mat-label>Lastname</mat-label>
+                <input
+                  [(ngModel)]="u.lastname"
+                  name="lastname"
+                  matInput
+                  placeholder="Lastname"
+                  required
+                />
+                <mat-icon matSuffix>tag_faces</mat-icon>
+              </mat-form-field>
+              <mat-form-field
+                class="user-info"
+                appearance="outline"
+                *ngFor="let u of user | async"
+              >
+                <mat-label>Email</mat-label>
+                <input
+                  [(ngModel)]="u.email"
+                  name="email"
+                  matInput
+                  placeholder="Email"
+                  required
+                />
+                <mat-icon matSuffix>email</mat-icon>
+              </mat-form-field>
+              <mat-form-field class="user-info" *ngFor="let u of user | async">
+                <mat-label>Select Your Gender</mat-label>
+                <mat-select [(ngModel)]="u.gender" name="gender" required>
+                  <mat-option value="Male">Male</mat-option>
+                  <mat-option value="Female">Female</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button [disabled]="!f.valid" mat-flat-button>Update</button>
+            </form>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+    <mat-tab label="Your Tour Bookings History">
+      <div class="container">
+        <mat-selection-list #shoes>
+          @for (bookings of tourBookings | async; track bookings) {
+          <mat-list-item
+            ><div class="d-flex justify-content-between">
+              <h4>{{ bookings.tourname }}</h4>
+              <div>
+                <button (click)="details(bookings.tour_id)" mat-flat-button>
+                  Details
+                </button>
+                <button mat-button>Cancel Booking</button>
+              </div>
+            </div></mat-list-item
+          >
+          }
+        </mat-selection-list>
+      </div>
+    </mat-tab>
   </mat-tab-group>
 </div>

@@ -1,0 +1,1133 @@
+{
+  "settings": {
+    "languages": [
+      "en"
+    ],
+    "forceNER": true,
+    "tag": "nlp",
+    "threshold": 0.5,
+    "autoLoad": true,
+    "autoSave": true,
+    "modelFileName": "model.nlp",
+    "executeActionsBeforeAnswers": false,
+    "calculateSentiment": true
+  },
+  "nluManager": {
+    "settings": {
+      "tag": "nlu-manager"
+    },
+    "locales": [
+      "en"
+    ],
+    "languageNames": {},
+    "domainManagers": {
+      "en": {
+        "settings": {
+          "locale": "en",
+          "trainByDomain": false,
+          "tag": "domain-manager-en",
+          "nluByDomain": {
+            "default": {
+              "className": "NeuralNlu",
+              "settings": {}
+            }
+          },
+          "useStemDict": true
+        },
+        "stemDict": {
+          "in,includ,is,packag,the,tour,what": {
+            "intent": "user.package",
+            "domain": "default"
+          },
+          "cancel,happen,i,if,my,need,or,reschedul,to,tour,what": {
+            "intent": "user.tourCancel",
+            "domain": "default"
+          },
+          "age,are,for,restrict,there,tour,your": {
+            "intent": "user.age",
+            "domain": "default"
+          },
+          "dure,is,provid,the,tour,transport": {
+            "intent": "user.transportation",
+            "domain": "default"
+          },
+          "a,book,do,how,i,tour": {
+            "intent": "user.tourbook",
+            "domain": "default"
+          },
+          "a,bring,i,on,should,tour,what": {
+            "intent": "user.bring",
+            "domain": "default"
+          },
+          "discount,do,group,offer,you": {
+            "intent": "user.discounts",
+            "domain": "default"
+          },
+          "are,for,solo,suitabl,tour,travel,your": {
+            "intent": "user.solo",
+            "domain": "default"
+          },
+          "a,book,can,i,privat,tour": {
+            "intent": "user.privateTour",
+            "domain": "default"
+          },
+          "are,for,in,measur,place,safeti,the,tour,what": {
+            "intent": "user.safety",
+            "domain": "default"
+          }
+        },
+        "intentDict": {
+          "user.package": "default",
+          "user.tourCancel": "default",
+          "user.age": "default",
+          "user.transportation": "default",
+          "user.tourbook": "default",
+          "user.bring": "default",
+          "user.discounts": "default",
+          "user.solo": "default",
+          "user.privateTour": "default",
+          "user.safety": "default"
+        },
+        "sentences": [
+          {
+            "domain": "default",
+            "utterance": "What's included in the tour package?",
+            "intent": "user.package"
+          },
+          {
+            "domain": "default",
+            "utterance": "What happens if I need to cancel or reschedule my tour?",
+            "intent": "user.tourCancel"
+          },
+          {
+            "domain": "default",
+            "utterance": "Are there age restrictions for your tours?",
+            "intent": "user.age"
+          },
+          {
+            "domain": "default",
+            "utterance": "Is transportation provided during the tour?",
+            "intent": "user.transportation"
+          },
+          {
+            "domain": "default",
+            "utterance": "How do I book a tour?",
+            "intent": "user.tourbook"
+          },
+          {
+            "domain": "default",
+            "utterance": "What should I bring on a tour?",
+            "intent": "user.bring"
+          },
+          {
+            "domain": "default",
+            "utterance": "Do you offer group discounts?",
+            "intent": "user.discounts"
+          },
+          {
+            "domain": "default",
+            "utterance": "Are your tours suitable for solo travelers?",
+            "intent": "user.solo"
+          },
+          {
+            "domain": "default",
+            "utterance": "Can I book a private tour?",
+            "intent": "user.privateTour"
+          },
+          {
+            "domain": "default",
+            "utterance": "What safety measures are in place for the tours?",
+            "intent": "user.safety"
+          }
+        ],
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "locale": "en",
+              "tag": "nlu-en",
+              "keepStopwords": true,
+              "nonefeatureValue": 1,
+              "nonedeltaMultiplier": 1.2,
+              "spellCheck": false,
+              "spellCheckDistance": 1,
+              "filterZeros": true,
+              "log": true
+            },
+            "features": {
+              "what": 1,
+              "is": 1,
+              "includ": 1,
+              "in": 1,
+              "the": 1,
+              "tour": 1,
+              "packag": 1,
+              "happen": 1,
+              "if": 1,
+              "i": 1,
+              "need": 1,
+              "to": 1,
+              "cancel": 1,
+              "or": 1,
+              "reschedul": 1,
+              "my": 1,
+              "are": 1,
+              "there": 1,
+              "age": 1,
+              "restrict": 1,
+              "for": 1,
+              "your": 1,
+              "transport": 1,
+              "provid": 1,
+              "dure": 1,
+              "how": 1,
+              "do": 1,
+              "book": 1,
+              "a": 1,
+              "should": 1,
+              "bring": 1,
+              "on": 1,
+              "you": 1,
+              "offer": 1,
+              "group": 1,
+              "discount": 1,
+              "suitabl": 1,
+              "solo": 1,
+              "travel": 1,
+              "can": 1,
+              "privat": 1,
+              "safeti": 1,
+              "measur": 1,
+              "place": 1
+            },
+            "intents": {
+              "user.package": 1,
+              "user.tourCancel": 1,
+              "user.age": 1,
+              "user.transportation": 1,
+              "user.tourbook": 1,
+              "user.bring": 1,
+              "user.discounts": 1,
+              "user.solo": 1,
+              "user.privateTour": 1,
+              "user.safety": 1
+            },
+            "intentFeatures": {
+              "user.package": {
+                "what": 1,
+                "is": 1,
+                "includ": 1,
+                "in": 1,
+                "the": 1,
+                "tour": 1,
+                "packag": 1
+              },
+              "user.tourCancel": {
+                "what": 1,
+                "happen": 1,
+                "if": 1,
+                "i": 1,
+                "need": 1,
+                "to": 1,
+                "cancel": 1,
+                "or": 1,
+                "reschedul": 1,
+                "my": 1,
+                "tour": 1
+              },
+              "user.age": {
+                "are": 1,
+                "there": 1,
+                "age": 1,
+                "restrict": 1,
+                "for": 1,
+                "your": 1,
+                "tour": 1
+              },
+              "user.transportation": {
+                "is": 1,
+                "transport": 1,
+                "provid": 1,
+                "dure": 1,
+                "the": 1,
+                "tour": 1
+              },
+              "user.tourbook": {
+                "how": 1,
+                "do": 1,
+                "i": 1,
+                "book": 1,
+                "a": 1,
+                "tour": 1
+              },
+              "user.bring": {
+                "what": 1,
+                "should": 1,
+                "i": 1,
+                "bring": 1,
+                "on": 1,
+                "a": 1,
+                "tour": 1
+              },
+              "user.discounts": {
+                "do": 1,
+                "you": 1,
+                "offer": 1,
+                "group": 1,
+                "discount": 1
+              },
+              "user.solo": {
+                "are": 1,
+                "your": 1,
+                "tour": 1,
+                "suitabl": 1,
+                "for": 1,
+                "solo": 1,
+                "travel": 1
+              },
+              "user.privateTour": {
+                "can": 1,
+                "i": 1,
+                "book": 1,
+                "a": 1,
+                "privat": 1,
+                "tour": 1
+              },
+              "user.safety": {
+                "what": 1,
+                "safeti": 1,
+                "measur": 1,
+                "are": 1,
+                "in": 1,
+                "place": 1,
+                "for": 1,
+                "the": 1,
+                "tour": 1
+              }
+            },
+            "featuresToIntent": {
+              "what": [
+                "user.package",
+                "user.tourCancel",
+                "user.bring",
+                "user.safety"
+              ],
+              "is": [
+                "user.package",
+                "user.transportation"
+              ],
+              "includ": [
+                "user.package"
+              ],
+              "in": [
+                "user.package",
+                "user.safety"
+              ],
+              "the": [
+                "user.package",
+                "user.transportation",
+                "user.safety"
+              ],
+              "tour": [
+                "user.package",
+                "user.tourCancel",
+                "user.age",
+                "user.transportation",
+                "user.tourbook",
+                "user.bring",
+                "user.solo",
+                "user.privateTour",
+                "user.safety"
+              ],
+              "packag": [
+                "user.package"
+              ],
+              "happen": [
+                "user.tourCancel"
+              ],
+              "if": [
+                "user.tourCancel"
+              ],
+              "i": [
+                "user.tourCancel",
+                "user.tourbook",
+                "user.bring",
+                "user.privateTour"
+              ],
+              "need": [
+                "user.tourCancel"
+              ],
+              "to": [
+                "user.tourCancel"
+              ],
+              "cancel": [
+                "user.tourCancel"
+              ],
+              "or": [
+                "user.tourCancel"
+              ],
+              "reschedul": [
+                "user.tourCancel"
+              ],
+              "my": [
+                "user.tourCancel"
+              ],
+              "are": [
+                "user.age",
+                "user.solo",
+                "user.safety"
+              ],
+              "there": [
+                "user.age"
+              ],
+              "age": [
+                "user.age"
+              ],
+              "restrict": [
+                "user.age"
+              ],
+              "for": [
+                "user.age",
+                "user.solo",
+                "user.safety"
+              ],
+              "your": [
+                "user.age",
+                "user.solo"
+              ],
+              "transport": [
+                "user.transportation"
+              ],
+              "provid": [
+                "user.transportation"
+              ],
+              "dure": [
+                "user.transportation"
+              ],
+              "how": [
+                "user.tourbook"
+              ],
+              "do": [
+                "user.tourbook",
+                "user.discounts"
+              ],
+              "book": [
+                "user.tourbook",
+                "user.privateTour"
+              ],
+              "a": [
+                "user.tourbook",
+                "user.bring",
+                "user.privateTour"
+              ],
+              "should": [
+                "user.bring"
+              ],
+              "bring": [
+                "user.bring"
+              ],
+              "on": [
+                "user.bring"
+              ],
+              "you": [
+                "user.discounts"
+              ],
+              "offer": [
+                "user.discounts"
+              ],
+              "group": [
+                "user.discounts"
+              ],
+              "discount": [
+                "user.discounts"
+              ],
+              "suitabl": [
+                "user.solo"
+              ],
+              "solo": [
+                "user.solo"
+              ],
+              "travel": [
+                "user.solo"
+              ],
+              "can": [
+                "user.privateTour"
+              ],
+              "privat": [
+                "user.privateTour"
+              ],
+              "safeti": [
+                "user.safety"
+              ],
+              "measur": [
+                "user.safety"
+              ],
+              "place": [
+                "user.safety"
+              ]
+            },
+            "neuralNetwork": {
+              "settings": {
+                "locale": "en",
+                "tag": "nlu-en",
+                "keepStopwords": true,
+                "nonefeatureValue": 1,
+                "nonedeltaMultiplier": 1.2,
+                "spellCheck": false,
+                "spellCheckDistance": 1,
+                "filterZeros": true,
+                "log": true
+              },
+              "features": [
+                "what",
+                "is",
+                "includ",
+                "in",
+                "the",
+                "tour",
+                "packag",
+                "happen",
+                "if",
+                "i",
+                "need",
+                "to",
+                "cancel",
+                "or",
+                "reschedul",
+                "my",
+                "are",
+                "there",
+                "age",
+                "restrict",
+                "for",
+                "your",
+                "transport",
+                "provid",
+                "dure",
+                "how",
+                "do",
+                "book",
+                "a",
+                "should",
+                "bring",
+                "on",
+                "you",
+                "offer",
+                "group",
+                "discount",
+                "suitabl",
+                "solo",
+                "travel",
+                "can",
+                "privat",
+                "safeti",
+                "measur",
+                "place"
+              ],
+              "intents": [
+                "user.package",
+                "user.tourCancel",
+                "user.age",
+                "user.transportation",
+                "user.tourbook",
+                "user.bring",
+                "user.discounts",
+                "user.solo",
+                "user.privateTour",
+                "user.safety"
+              ],
+              "perceptrons": [
+                [
+                  1.7186280488967896,
+                  2.1548373699188232,
+                  3.3751189708709717,
+                  2.318854570388794,
+                  1.0971094369888306,
+                  0.17704303562641144,
+                  3.3751189708709717,
+                  -0.22698266804218292,
+                  -0.22698266804218292,
+                  -0.7039512395858765,
+                  -0.22698266804218292,
+                  -0.22698266804218292,
+                  -0.22698266804218292,
+                  -0.22698266804218292,
+                  -0.22698266804218292,
+                  -0.22698266804218292,
+                  -1.2320441007614136,
+                  -0.1014295369386673,
+                  -0.1014295369386673,
+                  -0.1014295369386673,
+                  -1.2320441007614136,
+                  -0.1577407866716385,
+                  -1.190521240234375,
+                  -1.190521240234375,
+                  -1.190521240234375,
+                  -0.07354331761598587,
+                  -0.11086404323577881,
+                  -0.10137490928173065,
+                  -0.42020127177238464,
+                  -0.29646581411361694,
+                  -0.29646581411361694,
+                  -0.29646581411361694,
+                  -0.016518959775567055,
+                  -0.016518959775567055,
+                  -0.016518959775567055,
+                  -0.016518959775567055,
+                  -0.028594104573130608,
+                  -0.028594104573130608,
+                  -0.028594104573130608,
+                  -0.01124633476138115,
+                  -0.01124633476138115,
+                  -1.033311128616333,
+                  -1.033311128616333,
+                  -1.033311128616333,
+                  0.07463671403031955
+                ],
+                [
+                  0.7260293960571289,
+                  -0.31772172451019287,
+                  -0.15908417105674744,
+                  -0.31954169273376465,
+                  -0.4818349778652191,
+                  -0.1011056900024414,
+                  -0.15908417105674744,
+                  1.6409156322479248,
+                  1.6409156322479248,
+                  0.6305294632911682,
+                  1.6409156322479248,
+                  1.6409156322479248,
+                  1.6409156322479248,
+                  1.6409156322479248,
+                  1.6409156322479248,
+                  1.6409156322479248,
+                  -0.30822068452835083,
+                  -0.08928228914737701,
+                  -0.08928228914737701,
+                  -0.08928228914737701,
+                  -0.30822068452835083,
+                  -0.1573881208896637,
+                  -0.11167515069246292,
+                  -0.11167515069246292,
+                  -0.11167515069246292,
+                  -0.23700357973575592,
+                  -0.2633761167526245,
+                  -0.4251159429550171,
+                  -0.9635198712348938,
+                  -0.4713461101055145,
+                  -0.4713461101055145,
+                  -0.4713461101055145,
+                  -0.009135725907981396,
+                  -0.009135725907981396,
+                  -0.009135725907981396,
+                  -0.009135725907981396,
+                  -0.037655193358659744,
+                  -0.037655193358659744,
+                  -0.037655193358659744,
+                  -0.12137355655431747,
+                  -0.12137355655431747,
+                  -0.10978568345308304,
+                  -0.10978568345308304,
+                  -0.10978568345308304,
+                  -0.06124241565555016
+                ],
+                [
+                  -0.6266535520553589,
+                  -0.16841179132461548,
+                  -0.005457949358969927,
+                  -0.4727344512939453,
+                  -0.6760569214820862,
+                  0.49494585394859314,
+                  -0.005457949358969927,
+                  -0.0045297592878341675,
+                  -0.0045297592878341675,
+                  -0.37237170338630676,
+                  -0.0045297592878341675,
+                  -0.0045297592878341675,
+                  -0.0045297592878341675,
+                  -0.0045297592878341675,
+                  -0.0045297592878341675,
+                  -0.0045297592878341675,
+                  1.094962239265442,
+                  3.2507524490356445,
+                  3.2507524490356445,
+                  3.2507524490356445,
+                  1.094962239265442,
+                  1.6337122917175293,
+                  -0.15271776914596558,
+                  -0.15271776914596558,
+                  -0.15271776914596558,
+                  -0.11900047212839127,
+                  -0.21507444977760315,
+                  -0.21272198855876923,
+                  -0.3598780930042267,
+                  -0.09991679340600967,
+                  -0.09991679340600967,
+                  -0.09991679340600967,
+                  -0.04803751781582832,
+                  -0.04803751781582832,
+                  -0.04803751781582832,
+                  -0.04803751781582832,
+                  -1.5555317401885986,
+                  -1.5555317401885986,
+                  -1.5555317401885986,
+                  -0.050776440650224686,
+                  -0.050776440650224686,
+                  -0.45647308230400085,
+                  -0.45647308230400085,
+                  -0.45647308230400085,
+                  0.21520006433197095
+                ],
+                [
+                  -1.5685311555862427,
+                  1.9616553783416748,
+                  -1.0889943838119507,
+                  -1.3976131677627563,
+                  1.6549581289291382,
+                  0.8908381462097168,
+                  -1.0889943838119507,
+                  -0.013080241158604622,
+                  -0.013080241158604622,
+                  -0.4972122609615326,
+                  -0.013080241158604622,
+                  -0.013080241158604622,
+                  -0.013080241158604622,
+                  -0.013080241158604622,
+                  -0.013080241158604622,
+                  -0.013080241158604622,
+                  -0.5356481671333313,
+                  -0.03639078885316849,
+                  -0.03639078885316849,
+                  -0.03639078885316849,
+                  -0.5356481671333313,
+                  -0.23736758530139923,
+                  3.121777296066284,
+                  3.121777296066284,
+                  3.121777296066284,
+                  -0.14170902967453003,
+                  -0.2466515451669693,
+                  -0.32546794414520264,
+                  -0.4715173542499542,
+                  -0.10148671269416809,
+                  -0.10148671269416809,
+                  -0.10148671269416809,
+                  -0.07224404811859131,
+                  -0.07224404811859131,
+                  -0.07224404811859131,
+                  -0.07224404811859131,
+                  -0.16768668591976166,
+                  -0.16768668591976166,
+                  -0.16768668591976166,
+                  -0.14741250872612,
+                  -0.14741250872612,
+                  -0.23689189553260803,
+                  -0.23689189553260803,
+                  -0.23689189553260803,
+                  0.4022537457025734
+                ],
+                [
+                  -1.0480479001998901,
+                  -0.15281042456626892,
+                  -0.02594587206840515,
+                  -0.07427997887134552,
+                  -0.21546953916549683,
+                  0.7639871835708618,
+                  -0.02594587206840515,
+                  -0.11750443279743195,
+                  -0.11750443279743195,
+                  1.1793607473373413,
+                  -0.11750443279743195,
+                  -0.11750443279743195,
+                  -0.11750443279743195,
+                  -0.11750443279743195,
+                  -0.11750443279743195,
+                  -0.11750443279743195,
+                  -0.2445325255393982,
+                  -0.023827845230698586,
+                  -0.023827845230698586,
+                  -0.023827845230698586,
+                  -0.2445325255393982,
+                  -0.1820136308670044,
+                  -0.10278847813606262,
+                  -0.10278847813606262,
+                  -0.10278847813606262,
+                  4.709379196166992,
+                  3.8211135864257812,
+                  2.1672465801239014,
+                  1.357688546180725,
+                  -0.7533259987831116,
+                  -0.7533259987831116,
+                  -0.7533259987831116,
+                  -0.9246463775634766,
+                  -0.9246463775634766,
+                  -0.9246463775634766,
+                  -0.9246463775634766,
+                  -0.13576745986938477,
+                  -0.13576745986938477,
+                  -0.13576745986938477,
+                  -2.5618584156036377,
+                  -2.5618584156036377,
+                  -0.03249507024884224,
+                  -0.03249507024884224,
+                  -0.03249507024884224,
+                  -0.0894950873141025
+                ],
+                [
+                  1.9757128953933716,
+                  -0.4032863676548004,
+                  -0.3778976500034332,
+                  -0.6271280646324158,
+                  -0.6522637605667114,
+                  0.19464969635009766,
+                  -0.3778976500034332,
+                  -0.4668780267238617,
+                  -0.4668780267238617,
+                  1.0155937671661377,
+                  -0.4668780267238617,
+                  -0.4668780267238617,
+                  -0.4668780267238617,
+                  -0.4668780267238617,
+                  -0.4668780267238617,
+                  -0.4668780267238617,
+                  -0.3678000271320343,
+                  -0.01386856846511364,
+                  -0.01386856846511364,
+                  -0.01386856846511364,
+                  -0.3678000271320343,
+                  -0.12440541386604309,
+                  -0.012932972051203251,
+                  -0.012932972051203251,
+                  -0.012932972051203251,
+                  -0.7123943567276001,
+                  -0.7823503017425537,
+                  -1.5830638408660889,
+                  1.553930640220642,
+                  3.151393413543701,
+                  3.151393413543701,
+                  3.151393413543701,
+                  -0.04821979999542236,
+                  -0.04821979999542236,
+                  -0.04821979999542236,
+                  -0.04821979999542236,
+                  -0.09159910678863525,
+                  -0.09159910678863525,
+                  -0.09159910678863525,
+                  -0.8014004230499268,
+                  -0.8014004230499268,
+                  -0.20258547365665436,
+                  -0.20258547365665436,
+                  -0.20258547365665436,
+                  0.06162704072173003
+                ],
+                [
+                  -0.12934337556362152,
+                  -0.11080396175384521,
+                  -0.04503742605447769,
+                  -0.08897863328456879,
+                  -0.15473739802837372,
+                  -0.9642994403839111,
+                  -0.04503742605447769,
+                  -0.026673516258597374,
+                  -0.026673516258597374,
+                  -0.6818464398384094,
+                  -0.026673516258597374,
+                  -0.026673516258597374,
+                  -0.026673516258597374,
+                  -0.026673516258597374,
+                  -0.026673516258597374,
+                  -0.026673516258597374,
+                  -0.15258356928825378,
+                  -0.0251412782818079,
+                  -0.0251412782818079,
+                  -0.0251412782818079,
+                  -0.15258356928825378,
+                  -0.10771140456199646,
+                  -0.053882207721471786,
+                  -0.053882207721471786,
+                  -0.053882207721471786,
+                  -0.5709750652313232,
+                  2.1830410957336426,
+                  -0.6425854563713074,
+                  -0.6425854563713074,
+                  0,
+                  0,
+                  0,
+                  2.7902965545654297,
+                  2.7902965545654297,
+                  2.7902965545654297,
+                  2.7902965545654297,
+                  -0.0683024600148201,
+                  -0.0683024600148201,
+                  -0.0683024600148201,
+                  -0.04816707968711853,
+                  -0.04816707968711853,
+                  -0.03158743679523468,
+                  -0.03158743679523468,
+                  -0.03158743679523468,
+                  0.8956038486079472
+                ],
+                [
+                  -0.7228531837463379,
+                  -0.1224798783659935,
+                  -0.04211166128516197,
+                  -0.5979300737380981,
+                  -0.6904541254043579,
+                  0.5381748080253601,
+                  -0.04211166128516197,
+                  -0.07340200990438461,
+                  -0.07340200990438461,
+                  -0.3382892310619354,
+                  -0.07340200990438461,
+                  -0.07340200990438461,
+                  -0.07340200990438461,
+                  -0.07340200990438461,
+                  -0.07340200990438461,
+                  -0.07340200990438461,
+                  1.043998122215271,
+                  -1.5469740629196167,
+                  -1.5469740629196167,
+                  -1.5469740629196167,
+                  1.043998122215271,
+                  1.6485302448272705,
+                  -0.050544094294309616,
+                  -0.050544094294309616,
+                  -0.050544094294309616,
+                  -0.035246722400188446,
+                  -0.09206283837556839,
+                  -0.23016279935836792,
+                  -0.23303116858005524,
+                  -0.0008167607011273503,
+                  -0.0008167607011273503,
+                  -0.0008167607011273503,
+                  -0.04265989735722542,
+                  -0.04265989735722542,
+                  -0.04265989735722542,
+                  -0.04265989735722542,
+                  3.255063056945801,
+                  3.255063056945801,
+                  3.255063056945801,
+                  -0.17406372725963593,
+                  -0.17406372725963593,
+                  -0.5142399072647095,
+                  -0.5142399072647095,
+                  -0.5142399072647095,
+                  0.2453561592181393
+                ],
+                [
+                  -1.162457823753357,
+                  -0.2634572386741638,
+                  -0.08942104130983353,
+                  -0.17842401564121246,
+                  -0.36249879002571106,
+                  0.45762962102890015,
+                  -0.08942104130983353,
+                  -0.23048996925354004,
+                  -0.23048996925354004,
+                  1.0670161247253418,
+                  -0.23048996925354004,
+                  -0.23048996925354004,
+                  -0.23048996925354004,
+                  -0.23048996925354004,
+                  -0.23048996925354004,
+                  -0.23048996925354004,
+                  -0.2678403854370117,
+                  -0.14965273439884186,
+                  -0.14965273439884186,
+                  -0.14965273439884186,
+                  -0.2678403854370117,
+                  -0.1702730655670166,
+                  -0.13952140510082245,
+                  -0.13952140510082245,
+                  -0.13952140510082245,
+                  -2.4521493911743164,
+                  -2.4521493911743164,
+                  2.028897285461426,
+                  1.3472832441329956,
+                  -0.6557481288909912,
+                  -0.6557481288909912,
+                  -0.6557481288909912,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.008335934951901436,
+                  -0.008335934951901436,
+                  -0.008335934951901436,
+                  4.494344234466553,
+                  4.494344234466553,
+                  -0.051980726420879364,
+                  -0.051980726420879364,
+                  -0.051980726420879364,
+                  0.23251833934374658
+                ],
+                [
+                  1.0630319118499756,
+                  -1.321954607963562,
+                  -1.1072779893875122,
+                  1.4840631484985352,
+                  1.271758794784546,
+                  -0.3413849472999573,
+                  -1.1072779893875122,
+                  -0.16465742886066437,
+                  -0.16465742886066437,
+                  -0.4373832643032074,
+                  -0.16465742886066437,
+                  -0.16465742886066437,
+                  -0.16465742886066437,
+                  -0.16465742886066437,
+                  -0.16465742886066437,
+                  -0.16465742886066437,
+                  1.5122195482254028,
+                  -0.5464509725570679,
+                  -0.5464509725570679,
+                  -0.5464509725570679,
+                  1.5122195482254028,
+                  -1.1172398328781128,
+                  -0.1424950510263443,
+                  -0.1424950510263443,
+                  -0.1424950510263443,
+                  -0.02959739975631237,
+                  -0.048458490520715714,
+                  -0.02959739975631237,
+                  -0.2005942016839981,
+                  -0.14659859240055084,
+                  -0.14659859240055084,
+                  -0.14659859240055084,
+                  -0.004749847110360861,
+                  -0.004749847110360861,
+                  -0.004749847110360861,
+                  -0.004749847110360861,
+                  -0.5082004070281982,
+                  -0.5082004070281982,
+                  -0.5082004070281982,
+                  0,
+                  0,
+                  2.646658182144165,
+                  2.646658182144165,
+                  2.646658182144165,
+                  -0.17507842884526997
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "intentDomains": {},
+    "extraSentences": [
+      [
+        "en",
+        "What's included in the tour package?"
+      ],
+      [
+        "en",
+        "What happens if I need to cancel or reschedule my tour?"
+      ],
+      [
+        "en",
+        "Are there age restrictions for your tours?"
+      ],
+      [
+        "en",
+        "Is transportation provided during the tour?"
+      ],
+      [
+        "en",
+        "How do I book a tour?"
+      ],
+      [
+        "en",
+        "What should I bring on a tour?"
+      ],
+      [
+        "en",
+        "Do you offer group discounts?"
+      ],
+      [
+        "en",
+        "Are your tours suitable for solo travelers?"
+      ],
+      [
+        "en",
+        "Can I book a private tour?"
+      ],
+      [
+        "en",
+        "What safety measures are in place for the tours?"
+      ]
+    ]
+  },
+  "ner": {
+    "settings": {
+      "tag": "ner",
+      "entityPreffix": "%",
+      "entitySuffix": "%"
+    },
+    "rules": {}
+  },
+  "nlgManager": {
+    "settings": {
+      "tag": "nlg-manager"
+    },
+    "responses": {
+      "en": {
+        "user.package": [
+          {
+            "answer": "Our tour packages include transportation, guided tours, accommodations, and most meals. Specific inclusions vary by package, so please refer to the details of each tour for more information."
+          }
+        ],
+        "user.tourCancel": [
+          {
+            "answer": "Cancellations and rescheduling are subject to our cancellation policy. Generally, you can cancel or modify your booking up to 48 hours before the tour starts, with a full or partial refund depending on the timing. Please review our cancellation policy for full details."
+          }
+        ],
+        "user.age": [
+          {
+            "answer": "Most of our tours are family-friendly, but certain tours may have age recommendations based on the difficulty of the activities involved. Please check the tour details for age guidelines before booking."
+          }
+        ],
+        "user.transportation": [
+          {
+            "answer": "Yes, transportation is included in the tour price. We provide comfortable buses, coaches, or private vehicles depending on the size and nature of the group."
+          }
+        ],
+        "user.tourbook": [
+          {
+            "answer": "Booking a tour is easy! Simply visit our website, select the tour you're interested in, choose your dates, and complete the online booking form. If you need assistance, you can always reach out to our customer support team."
+          }
+        ],
+        "user.bring": [
+          {
+            "answer": "We recommend packing comfortable clothing, walking shoes, sunscreen, and any personal items you might need for the duration of the tour. Specific packing suggestions will be provided in your booking confirmation email."
+          }
+        ],
+        "user.discounts": [
+          {
+            "answer": "Yes! We offer discounts for groups of 10 or more. Please contact us directly to inquire about group rates and availability."
+          }
+        ],
+        "user.solo": [
+          {
+            "answer": "Absolutely! Our tours are perfect for solo travelers. You'll have the opportunity to meet new people and enjoy the experience in a group setting, with the guidance of our expert tour guides."
+          }
+        ],
+        "user.privateTour": [
+          {
+            "answer": "Yes, we offer private tours for individuals or groups who prefer a more personalized experience. Contact us for pricing and availability."
+          }
+        ],
+        "user.safety": [
+          {
+            "answer": "We prioritize the safety of all our travelers. Our tours adhere to all local health and safety guidelines, and we have taken extra precautions in light of the ongoing health situation. This includes sanitization protocols, safe transportation, and social distancing when possible."
+          }
+        ]
+      }
+    }
+  },
+  "actionManager": {
+    "settings": {
+      "tag": "action-manager"
+    },
+    "actions": {}
+  },
+  "slotManager": {}
+}

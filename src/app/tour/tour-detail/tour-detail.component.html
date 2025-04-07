@@ -1,5 +1,342 @@
 <app-navbar />
 <br />
-<div *ngFor="let t of tour | async" class="container">
-  <h1 class="name">{{ t.tourname }}</h1>
+<!-- <div class="container-fluid" *ngFor="let t of tour | async">
+  <div class="image-container">
+    <img
+      src="./../../../assets/tour images/{{ t.image1 }}"
+      alt="Snow"
+      style="width: 100%; height: 400px"
+      class="shadow-1-strong rounded mb-4"
+    />
+    <div class="centered">
+      {{ t.tourname }}
+      <br />
+      <button
+        mat-flat-button
+        (click)="sendPaymentRequestUsingStripe(t.price, t.tour_id, t.tourname)"
+      >
+        Book Now <mat-icon>maps_ugc</mat-icon>
+      </button>
+      <button
+        mat-flat-button
+        (click)="
+          sendPaymentRequestUsingSslCommerz(t.price, t.tour_id, t.tourname)
+        "
+      >
+        Ssl <mat-icon>maps_ugc</mat-icon>
+      </button>
+    </div>
+  </div>
+</div> -->
+
+<div class="container-fluid" *ngFor="let t of tour | async">
+  <mat-card class="card-body-details" appearance="raised">
+    <div class="row">
+      <div class="col-md-6">
+        <img
+          *ngIf="image == ''"
+          src="./../../../assets/tour images/{{ t.image1 }}"
+          alt="Snow"
+          style="width: 100%; height: 500px"
+          class="shadow-1-strong rounded mb-4"
+        />
+        <img
+          *ngIf="image !== ''"
+          src="./../../../assets/tour images/{{ image }}"
+          alt="Snow"
+          style="width: 100%; height: 500px"
+          class="shadow-1-strong rounded mb-4"
+        />
+        <div class="container">
+          <div class="row">
+            <div class="row" *ngFor="let t of tour | async">
+              <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail">
+                  <img
+                    class="img-thumbnail img-pointer"
+                    src="./../../../assets/tour images/{{ t.image1 }}"
+                    alt="Another alt text"
+                    (click)="changeImage(t.image1)"
+                  />
+                </a>
+              </div>
+              <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail">
+                  <img
+                    class="img-thumbnail img-pointer"
+                    src="./../../../assets/tour images/{{ t.image2 }}"
+                    alt="Another alt text"
+                    (click)="changeImage(t.image2)"
+                  />
+                </a>
+              </div>
+
+              <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail">
+                  <img
+                    class="img-thumbnail img-pointer"
+                    src="./../../../assets/tour images/{{ t.image3 }}"
+                    alt="Another alt text"
+                    (click)="changeImage(t.image3)"
+                  />
+                </a>
+              </div>
+              <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail">
+                  <img
+                    class="img-thumbnail img-pointer"
+                    src="./../../../assets/tour images/{{ t.image4 }}"
+                    alt="Another alt text"
+                    (click)="changeImage(t.image4)"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="tour-info">
+          <p class="d-flex">
+            <mat-icon class="start-icon">location_city</mat-icon>
+            <strong>Tour At: </strong>{{ t.tourname }}
+          </p>
+          <p class="d-flex">
+            <mat-icon class="start-icon">schedule</mat-icon>
+            <strong>Start Date: </strong>{{ t.start | date : "dd/MM/yyyy" }}
+          </p>
+          <p class="d-flex">
+            <mat-icon class="start-icon">schedule</mat-icon
+            ><strong>End Date:</strong> {{ t.end | date : "dd/MM/yyyy" }}
+          </p>
+          <p class="d-flex">
+            <mat-icon>attach_money</mat-icon> <strong>Price: </strong> ${{
+              t.price
+            }}
+          </p>
+          <p class="d-flex">
+            <mat-icon>pin_drop</mat-icon> <strong>Location: </strong
+            >{{ t.location }}
+          </p>
+          <mat-form-field>
+            <mat-label>Select A Payment Option</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option
+                (click)="showOrHidePaymentsButtons()"
+                value="Pay Using Stripes"
+                >Pay Using Stripes</mat-option
+              >
+              <mat-option
+                (click)="showOrHidePaymentsButtons()"
+                value="Pay In BDT(Using Sslcommerz)"
+                >Pay In BDT(Using Sslcommerz)</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <br />
+          <button
+            *ngIf="showStripesBtn"
+            mat-flat-button
+            (click)="
+              sendPaymentRequestUsingStripe(
+                t.price,
+                t.tour_id,
+                t.tourname,
+                t.image1
+              )
+            "
+          >
+            Book Now <mat-icon>maps_ugc</mat-icon>
+          </button>
+          <button
+            *ngIf="showSslBtn"
+            mat-flat-button
+            (click)="
+              sendPaymentRequestUsingSslCommerz(t.price, t.tour_id, t.tourname)
+            "
+          >
+            Book now<mat-icon>maps_ugc</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>
+
+<!-- <div class="container">
+  <mat-card appearance="outlined">
+    <mat-card-content *ngFor="let t of tour | async">
+      <div class="tour-info">
+        <p>Start Date: {{ t.start | date : "dd/MM/yyyy" }}</p>
+        <p>End Date: {{ t.end | date : "dd/MM/yyyy" }}</p>
+        <p>Price: ${{ t.price }}</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div> -->
+<br />
+<!-- <div
+  class="container desc shadow-1-strong rounded mb-4"
+  *ngFor="let t of tour | async"
+>
+  <p>
+    "{{ t.description }} Lorem ipsum dolor sit amet consectetur adipisicing
+    elit. Culpa harum eum voluptatem fugiat provident maxime cumque doloribus
+    maiores mollitia. Debitis expedita incidunt et. Error, quibusdam suscipit!
+    Fuga odio at consectetur? Lorem ipsum dolor, sit amet consectetur
+    adipisicing elit. Est sit corporis corrupti quo sunt magnam ea numquam?
+    Ipsum quisquam ullam beatae amet corporis dolore dolorem quas est, nesciunt
+    laboriosam harum! Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+    Eveniet, architecto ipsum rerum rem omnis ab esse fugit fuga porro placeat
+    perferendis accusantium incidunt! Unde, a commodi quas facere libero
+    placeat. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio
+    voluptates nemo labore. Accusantium, in amet? Eos id ullam temporibus quis,
+    accusamus qui atque quisquam, optio nisi, molestiae distinctio. Excepturi,
+    consequatur."
+  </p>
+</div> -->
+
+<!-- Large Description Section -->
+<section *ngFor="let t of tour | async" class="large-description-section">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Description Container -->
+      <div class="col-lg-8 mx-auto">
+        <div class="large-description-container">
+          <h2>Explore the Beauty of {{ t.tourname }}:</h2>
+          <div class="large-description">
+            <p>
+              {{ t.description }}
+            </p>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod ab
+              distinctio ad quis, veniam a temporibus. Eligendi id omnis,
+              molestiae velit harum officiis praesentium deleniti voluptatem
+              debitis possimus alias ad.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam at
+              reprehenderit adipisci maxime labore. Aliquid iure hic incidunt.
+              Animi consequuntur quas numquam beatae minus sed molestiae dolor
+              corrupti! Quidem, hic.
+            </p>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Provident accusantium, alias vero deleniti eum illum id voluptates
+              saepe quam quaerat vitae autem fuga aliquam? Dolorem voluptatem
+              fugiat omnis facilis ad.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur,
+              commodi nostrum veniam rem eum molestias nisi recusandae. Ab
+              voluptas cumque neque alias in veniam consectetur earum, delectus
+              iste nihil sint.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="row" *ngFor="let t of tour | async">
+      <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a class="thumbnail">
+          <img
+            class="img-thumbnail"
+            src="./../../../assets/tour images/{{ t.image1 }}"
+            alt="Another alt text"
+          />
+        </a>
+      </div>
+      <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a class="thumbnail">
+          <img
+            class="img-thumbnail"
+            src="./../../../assets/tour images/{{ t.image2 }}"
+            alt="Another alt text"
+          />
+        </a>
+      </div>
+
+      <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a class="thumbnail">
+          <img
+            class="img-thumbnail"
+            src="./../../../assets/tour images/{{ t.image3 }}"
+            alt="Another alt text"
+          />
+        </a>
+      </div>
+      <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a class="thumbnail">
+          <img
+            class="img-thumbnail"
+            src="./../../../assets/tour images/{{ t.image4 }}"
+            alt="Another alt text"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<br />
+
+<div class="container">
+  <h2 class="text-center">User Reviews</h2>
+
+  <div class="card" *ngFor="let review of reviews | async">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-2">
+          <img
+            src="https://image.ibb.co/jw55Ex/def_face.jpg"
+            class="img img-rounded img-fluid"
+          />
+          <p class="text-secondary text-center">
+            Added On: {{ review.date | date : "dd/MM/yyyy" }}
+          </p>
+        </div>
+        <div class="col-md-10">
+          <strong class="float-left">{{ review.firstname }}</strong>
+          <div class="clearfix"></div>
+          <p>
+            {{ review.review }}
+          </p>
+          <!-- <p>
+            <a class="float-right btn btn-outline-primary ml-2">
+              <i class="fa fa-reply"></i> Reply</a
+            >
+            <a class="float-right btn text-white btn-danger">
+              <i class="fa fa-heart"></i> Like</a
+            >
+          </p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br />
+
+<div class="container">
+  <p>Add A Review:</p>
+  <form>
+    <mat-form-field style="width: 100%">
+      <mat-label>Leave a comment</mat-label>
+      <textarea
+        rows="10"
+        matInput
+        placeholder="Ex. It makes me feel..."
+        [(ngModel)]="review"
+        [ngModelOptions]="{ standalone: true }"
+      ></textarea>
+    </mat-form-field>
+    <button (click)="submitReview()" [disabled]="reviewBtn" mat-stroked-button>
+      {{ !reviewBtn ? "Add A Review" : "Posting..." }}
+    </button>
+  </form>
 </div>

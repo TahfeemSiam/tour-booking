@@ -1,0 +1,18 @@
+<h5 mat-dialog-title>Not Logged In 🔏</h5>
+<mat-dialog-content class="mat-typography">
+  <p>
+    SignIn with your account in order to leave a review 📝 or to make a tour
+    booking 📑
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+  <button
+    mat-button
+    [mat-dialog-close]="true"
+    routerLink="/login"
+    cdkFocusInitial
+  >
+    Login
+  </button>
+</mat-dialog-actions>

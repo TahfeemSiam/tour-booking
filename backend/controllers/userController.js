@@ -1,5 +1,6 @@
 const database = require("./../mysql");
 const Contact = require("./../models/contactModel");
+const manager = require("./../nlp");
 
 exports.getAllUsers = (req, res) => {
   const query = "SELECT * FROM users";
@@ -57,12 +58,44 @@ exports.storeUserInfo = (req, res) => {
 };
 
 exports.getUserByEmail = (req, res) => {
-  const query = "SELECT firstname, user_role FROM users WHERE email = ?";
+  const query = "SELECT * FROM users WHERE email = ?";
   database.query(query, [req.params.email], function (err, result) {
     if (err) throw err;
     res.status(200).json({
       message: "Got User Successfully",
       data: result,
     });
+  });
+};
+
+exports.getUserById = (req, res) => {
+  const query = "SELECT * FROM users WHERE user_id = ?";
+  database.query(query, [req.params.id], function (err, result) {
+    if (err) throw err;
+    res.status(200).json({
+      message: "Got User Successfully",
+      data: result,
+    });
+  });
+};
+
+exports.countUsers = (req, res) => {
+  const query = "SELECT COUNT(user_id) AS NumberOfUsers FROM users;";
+  database.query(query, function (err, result) {
+    if (err) throw err;
+    res.status(200).json({
+      message: "Number Of Users",
+      data: result,
+    });
+  });
+};
+
+exports.sendMessageToBot = async (req, res) => {
+  const response = await manager.process("en", req.body.message);
+  console.log(response);
+
+  res.status(200).json({
+    message: "Message Recieved",
+    reply: response.answers,
   });
 };

@@ -1,3 +1,120 @@
 .name {
   text-align: center;
 }
+
+.image-container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: xx-large;
+}
+
+.btn:focus,
+.btn:active,
+button:focus,
+button:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+#image-gallery .modal-footer {
+  display: block;
+}
+
+.thumb {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.desc {
+  background-image: linear-gradient(to bottom right, #1dd1a1, #10ac84, #01a3a4);
+  color: aliceblue;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.card-inner {
+  margin-left: 4rem;
+}
+
+.tour-info {
+  margin-left: 40%;
+  margin-top: 50%;
+  margin-bottom: 50%;
+  font-size: larger;
+}
+
+.img-pointer {
+  cursor: pointer;
+}
+
+.card-body-details {
+  /* background-image: linear-gradient(to right, #0984e3, #00cec9, #74b9ff); */
+  height: 700px;
+}
+
+/* General section styles */
+.large-description-section {
+  padding: 60px 0;
+  background-color: #f8f9fa;
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Container and card like design */
+.large-description-container {
+  background-color: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for the description container */
+.large-description-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.large-description-section h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  transition: color 0.3s ease;
+}
+
+/* Hover effect for the heading */
+.large-description-section h2:hover {
+  color: #1dd1a1;
+}
+
+/* Styling for the description text */
+.large-description {
+  font-size: 1.125rem;
+  color: #555;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.large-description p {
+  margin-bottom: 20px;
+}

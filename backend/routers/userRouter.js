@@ -6,5 +6,7 @@ userRouter.route("/getAllUsers").get(userController.getAllUsers);
 userRouter.route("/contact").post(userController.sendContactInfo);
 userRouter.route("/register").post(userController.storeUserInfo);
 userRouter.route("/getUserByEmail/:email").get(userController.getUserByEmail);
-
+userRouter.route("/getUserById/:id").get(userController.getUserById);
+userRouter.route("/sendMessageToBot").post(userController.sendMessageToBot);
+userRouter.route("/countUsers").get(userController.countUsers);
 module.exports = userRouter;

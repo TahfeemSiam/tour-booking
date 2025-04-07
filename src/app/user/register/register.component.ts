@@ -7,6 +7,7 @@ import { UserService } from '../user.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { User } from '../user.model';
 
 @Component({
   selector: 'app-register',

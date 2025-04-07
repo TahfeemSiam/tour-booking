@@ -38,7 +38,11 @@
           </button>
         </li>
         <li class="nav-item">
-          <button *ngIf="showUserDashboardButton" routerLink="/user" mat-button>
+          <button
+            *ngIf="showUserDashboardButton"
+            mat-button
+            routerLink="/user/{{ userId }}"
+          >
             User Dashboard <mat-icon>perm_identity</mat-icon>
           </button>
         </li>
@@ -62,8 +66,16 @@
         </li>
       </ul>
       <form class="d-flex">
-        <input class="form-control me-2" type="text" placeholder="Search" />
-        <button mat-flat-button><mat-icon>search</mat-icon> Search</button>
+        <input
+          [(ngModel)]="search"
+          [ngModelOptions]="{ standalone: true }"
+          class="form-control me-2"
+          type="text"
+          placeholder="Search"
+        />
+        <button (click)="sendSearchText()" mat-flat-button>
+          <mat-icon>search</mat-icon> Search
+        </button>
       </form>
     </div>
   </div>

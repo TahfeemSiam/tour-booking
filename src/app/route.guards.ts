@@ -40,6 +40,22 @@ export function checkIfValidTokenUser() {
     }
   }
 }
+export function checkIfUserIsLoggedIn() {
+  let tokenExpired: boolean;
+  let token = localStorage.getItem('token');
+  let user = localStorage.getItem('user_role');
+  if ((!token && !user) || user !== 'user') {
+    return false;
+  } else {
+    const expiry = JSON.parse(atob(String(token).split('.')[1])).exp;
+    tokenExpired = Math.floor(new Date().getTime() / 1000) >= expiry;
+    if (tokenExpired) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+}
 
 export function checkIfValidTokenSignUpOrRegister() {
   const router = inject(Router);

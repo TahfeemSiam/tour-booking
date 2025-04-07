@@ -1,0 +1,15 @@
+.tour-booking-success {
+  text-align: center;
+}
+
+.img {
+  height: 400px;
+}
+
+.card-body {
+  background-image: linear-gradient(to right, #0984e3, #00cec9, #74b9ff);
+}
+
+.text {
+  color: aliceblue;
+}

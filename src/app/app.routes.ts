@@ -15,10 +15,17 @@ import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.com
 import { UserListsComponent } from './user/admin-dashboard/user-lists/user-lists.component';
 import { DashboardInfoComponent } from './user/admin-dashboard/dashboard-info/dashboard-info.component';
 import { TourDetailComponent } from './tour/tour-detail/tour-detail.component';
+import { TourSearchComponent } from './tour/tour-search/tour-search.component';
+import { BookingSuccessComponent } from './tour/booking-success/booking-success.component';
 
 export const routes: Routes = [
   { component: HomeComponent, path: '' },
   { component: TourDetailComponent, path: 'detail/:id' },
+  { component: TourSearchComponent, path: 'search/:search' },
+  {
+    component: BookingSuccessComponent,
+    path: 'success/:tourId/:userId/:tourName/:amount',
+  },
   {
     component: AdminDashboardComponent,
     path: 'admin',
@@ -32,7 +39,7 @@ export const routes: Routes = [
   },
   {
     component: UserDashboardComponent,
-    path: 'user',
+    path: 'user/:id',
     canActivate: [checkIfValidTokenUser],
   },
   { component: ContactUsComponent, path: 'contact' },
