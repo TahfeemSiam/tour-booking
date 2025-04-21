@@ -14,14 +14,16 @@ tourRouter
   .get(tourController.getATourReviewById);
 tourRouter.route("/stripe/:id").post(tourController.makePayment);
 tourRouter
-  .route("/paymentWithSslCommerz/:id")
-  .post(tourController.makePaymentUsingSslCommerz);
+  .route("/paymentWithSslCommerz/:id/:amount/:name")
+  .get(tourController.makePaymentUsingSslCommerz);
 
 tourRouter.route("/storeBooking").post(tourController.storeBookings);
+tourRouter.route("/email").get(tourController.sendConfirmationEmail);
 tourRouter
   .route("/getBookingsByUserId/:userId")
   .get(tourController.getBookingsByUserId);
 
 tourRouter.route("/countTours").get(tourController.countTours);
+tourRouter.route("/countBookings").get(tourController.countBookings);
 
 module.exports = tourRouter;

@@ -138,12 +138,7 @@
             *ngIf="showStripesBtn"
             mat-flat-button
             (click)="
-              sendPaymentRequestUsingStripe(
-                t.price,
-                t.tour_id,
-                t.tourname,
-                t.image1
-              )
+              sendPaymentRequestUsingStripe(t.price, t.tour_id, t.tourname)
             "
           >
             Book Now <mat-icon>maps_ugc</mat-icon>
@@ -286,7 +281,7 @@
 <br />
 
 <div class="container">
-  <h2 class="text-center">User Reviews</h2>
+  <h2 class="text-center">User Reviews 📝</h2>
 
   <div class="card" *ngFor="let review of reviews | async">
     <div class="card-body">

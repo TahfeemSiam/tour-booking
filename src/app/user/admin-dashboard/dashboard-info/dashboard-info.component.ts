@@ -14,9 +14,14 @@ export class DashboardInfoComponent implements OnInit {
   tourService = inject(TourService);
   users!: number;
   tours!: number;
+  bookings!: number;
   ngOnInit() {
     this.tourService.getToursCount().subscribe((res: any) => {
       this.tours = res.data[0].NumberOfTours;
+    });
+
+    this.tourService.getToursBookingsCount().subscribe((res: any) => {
+      this.bookings = res.data[0].NumberOfBookings;
     });
 
     this.userService.getUsersCount().subscribe((res: any) => {

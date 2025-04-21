@@ -4,6 +4,7 @@ const Review = require("../models/reviewModel");
 const stripe = require("stripe")(
   "sk_test_51NPlrWDD1NVJPDTvAMdKy8Fxiq7F8I4kC2gVZFHcA3JszTS0lozpgNdwbsgnOIT7VyNhSjDSCAU1BHKm40CnpTws00uQcSneIh"
 );
+const nodemailer = require("nodemailer");
 const SSLCommerzPayment = require("sslcommerz-lts");
 var multer = require("multer");
 const fs = require("fs");
@@ -206,9 +207,9 @@ exports.getATourReviewById = (req, res) => {
 
 exports.makePayment = async (req, res) => {
   //get amount
-  const amount = req.body.amount;
+  const amount = req.body.price;
   const tourName = req.body.tourname;
-  const userId = req.body.userId;
+  const userId = req.body.user_id;
   const tourId = req.params.id;
   // const img = req.body.img;
   try {
@@ -246,8 +247,8 @@ exports.makePayment = async (req, res) => {
 };
 
 exports.makePaymentUsingSslCommerz = (req, res) => {
-  const amount = req.body.amount;
-  const tourName = req.body.name;
+  const amount = req.params.amount;
+  const tourName = req.params.name;
   const data = {
     total_amount: amount,
     currency: "USD",
@@ -297,10 +298,10 @@ exports.storeBookings = (req, res) => {
   const query =
     "INSERT INTO bookings (tour_id, user_id, tourname, price) VALUES (?, ?, ?, ?)";
   const tourBooking = new TourBooking(
-    req.body.tourId,
-    req.body.userId,
+    req.body.tour_id,
+    req.body.user_id,
     req.body.tourname,
-    req.body.amount
+    req.body.price
   );
   database.query(
     query,
@@ -318,6 +319,49 @@ exports.storeBookings = (req, res) => {
       });
     }
   );
+};
+
+exports.sendConfirmationEmail = async (req, res) => {
+  const transporter = nodemailer.createTransport({
+    service: "Gmail",
+    host: "smtp.gmail.com",
+    port: 465,
+    auth: {
+      user: "",
+      pass: "",
+    },
+  });
+  try {
+    const info = await transporter.sendMail({
+      from: '"Tour Admin" <>',
+      to: "",
+      subject: "Tour Booking Confirmed 📩",
+      text: "Your payment was made successfully and your tour booking has been confirmed",
+    });
+
+    res.status(200).json({
+      message: "Email Sent",
+      info: info.messageId,
+    });
+
+    console.log("Message sent: %s", info.messageId);
+  } catch (err) {
+    res.status(400).json({
+      message: "Something went wrong",
+      err,
+    });
+  }
+};
+
+exports.countBookings = (req, res) => {
+  const query = "SELECT COUNT(booking_id) AS NumberOfBookings FROM bookings;";
+  database.query(query, function (err, result) {
+    if (err) throw err;
+    res.status(200).json({
+      message: "Number Of Bookings",
+      data: result,
+    });
+  });
 };
 
 exports.getBookingsByUserId = (req, res) => {

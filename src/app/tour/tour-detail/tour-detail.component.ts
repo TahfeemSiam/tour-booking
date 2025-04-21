@@ -102,8 +102,7 @@ export class TourDetailComponent implements OnInit {
   sendPaymentRequestUsingStripe(
     amount: number,
     tourId: number,
-    tourName: string,
-    img: string
+    tourName: string
   ) {
     if (checkIfUserIsLoggedIn()) {
       const tourBooking = new TourBooking(
@@ -118,9 +117,13 @@ export class TourDetailComponent implements OnInit {
     }
   }
 
-  sendPaymentRequestUsingSslCommerz(amount: number, id: number, name: string) {
+  sendPaymentRequestUsingSslCommerz(
+    amount: number,
+    tourId: number,
+    tourName: string
+  ) {
     if (checkIfUserIsLoggedIn()) {
-      this.tourService.makePaymentUsingSslCommerz(amount, id, name);
+      this.tourService.makePaymentUsingSslCommerz(amount, tourId, tourName);
     } else {
       this.openDialog();
     }

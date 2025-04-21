@@ -50,6 +50,10 @@ export class TourService {
     return this.http.get<Number>(`http://localhost:5000/tour/countTours`);
   }
 
+  getToursBookingsCount() {
+    return this.http.get<Number>(`http://localhost:5000/tour/countBookings`);
+  }
+
   makePaymentUsingStripe(tourBooking: TourBooking) {
     this.http
       .post(
@@ -68,10 +72,9 @@ export class TourService {
 
   makePaymentUsingSslCommerz(amount: number, id: number, name: string) {
     this.http
-      .post(`http://localhost:5000/tour/paymentWithSslCommerz/${id}`, {
-        amount,
-        name,
-      })
+      .get(
+        `http://localhost:5000/tour/paymentWithSslCommerz/${id}/${amount}/${name}`
+      )
       .subscribe({
         next: (res: any) => {
           console.log(res.url);
@@ -92,6 +95,14 @@ export class TourService {
         error: (err) => console.log(err),
       });
   }
+
+  sendConfirmationEmail() {
+    this.http.get('http://localhost:5000/tour/email').subscribe({
+      next: (res) => console.log(res),
+      error: (err) => console.log(err),
+    });
+  }
+
   getBookingsByUserId(userId: number) {
     return this.http
       .get<TourBooking[]>(

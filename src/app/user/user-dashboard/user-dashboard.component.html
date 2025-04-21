@@ -59,6 +59,7 @@
               <mat-form-field
                 class="user-info"
                 appearance="outline"
+                [hidden]="true"
                 *ngFor="let u of user | async"
               >
                 <mat-label>Email</mat-label>
@@ -95,7 +96,12 @@
                 <button (click)="details(bookings.tour_id)" mat-flat-button>
                   Details
                 </button>
-                <button mat-button>Cancel Booking</button>
+                <button
+                  (click)="openBookingCancelDialog(bookings.tour_id)"
+                  mat-button
+                >
+                  Cancel Booking
+                </button>
               </div>
             </div></mat-list-item
           >

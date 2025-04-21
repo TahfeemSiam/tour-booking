@@ -48,13 +48,59 @@ exports.storeUserInfo = (req, res) => {
       req.body.user_role,
     ],
     function (err, result) {
-      if (err) throw err;
+      if (err) {
+        return res.status(400).json({
+          message: "Duplicate email",
+        });
+      }
       res.status(201).json({
         message: "User Record Created Successfully",
         data: result,
       });
     }
   );
+};
+
+exports.updateUserInfo = (req, res) => {
+  const query =
+    "UPDATE users SET firstname = ?, lastname = ?, email = ?, gender = ?, user_role = ? WHERE user_id = ?";
+  database.query(
+    query,
+    [
+      req.body.firstname,
+      req.body.lastname,
+      req.body.email,
+      req.body.gender,
+      "user",
+      req.params.userId,
+    ],
+    function (err, result) {
+      if (err) {
+        return res.status(400).json({
+          message: "User Info Update Failed",
+        });
+      }
+      res.status(200).json({
+        message: "User Info Updated Successfully",
+        data: result,
+      });
+    }
+  );
+};
+
+exports.cancelTourBooking = (req, res) => {
+  const query = "DELETE FROM bookings WHERE tour_id = ?";
+  database.query(query, [req.params.tourId], function (err, result) {
+    if (err) {
+      return res.status(400).json({
+        message: "Booking Cancel Failed",
+      });
+    }
+    res.status(200).json({
+      message: "Booking Was Cancelled Successfully",
+      data: result,
+    });
+  });
 };
 
 exports.getUserByEmail = (req, res) => {

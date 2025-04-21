@@ -31,10 +31,11 @@ export class UserService {
         firstname: user.firstName,
         lastname: user.lastName,
         email: user.email,
+        googleUser: true,
+        token: user.idToken,
       };
       console.log(googleUser);
       this.storeUserData(googleUser);
-      this.router.navigate(['/user']);
       // const httpHeaders: HttpHeaders = new HttpHeaders({
       //   token: user.idToken,
       // });
@@ -71,7 +72,7 @@ export class UserService {
   }
 
   storeUserData(user: any) {
-    if (user.firstName) {
+    if (!user.googleUser) {
       const { firstname, lastname, email, gender } = user.form.value;
       this.http
         .post('http://localhost:5000/user/register', {
@@ -100,11 +101,34 @@ export class UserService {
         .subscribe({
           next: (res) => {
             console.log(res);
+            this.getUserByEmail(user.email, user.token);
             this.userSignUp.next(false);
           },
-          error: (err) => console.log(err),
+          error: (err) => {
+            this.getUserByEmail(user.email, user.token);
+            console.log(err);
+          },
         });
     }
+  }
+
+  updateUserInfo(user: User, userId: number) {
+    return this.http.patch(
+      `http://localhost:5000/user/updateUserInfo/${userId}`,
+      user
+    );
+  }
+
+  cancelTourBooking(tourId: number) {
+    this.http
+      .delete(`http://localhost:5000/user/cancelBooking/${tourId}`)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          location.reload();
+        },
+        error: (err) => console.log(err),
+      });
   }
 
   firebaseSignUp(form: NgForm) {
@@ -130,7 +154,7 @@ export class UserService {
       .get(`http://localhost:5000/user/getUserByEmail/${email}`)
       .subscribe({
         next: (res: any) => {
-          console.log(res.data);
+          console.log(res);
           if (res.data[0].user_role == 'user') {
             localStorage.setItem('user_role', res.data[0].user_role);
             localStorage.setItem('firstname', res.data[0].firstname);

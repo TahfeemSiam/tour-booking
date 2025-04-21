@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Are You Sure You Want To Cancel The Booking?</h2>
+<mat-dialog-content>Click 'Yes' to Cancel</mat-dialog-content>
+<mat-dialog-actions>
+  <button
+    (click)="cancelBooking(data.tourId)"
+    mat-button
+    mat-dialog-close
+    cdkFocusInitial
+  >
+    Yes
+  </button>
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

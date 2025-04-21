@@ -4,10 +4,15 @@
   <mat-card class="card-body" appearance="raised">
     <mat-card-content class="tour-booking-success">
       <h1 class="text">Your Tour Has Been Booked Successfully ✅</h1>
+      <h1 class="text">A Confirmation Mail Has Sent To Your Account 📧</h1>
       <img
         src="./../../../assets/flat-design-summer-car-illustration_23-2149449887.jpg"
         class="img"
       />
+      <br />
+      <br />
+      <button (click)="viewPdf()" mat-raised-button>View Pdf</button>
+      <button routerLink="/" mat-button>Go To Home Page</button>
     </mat-card-content>
   </mat-card>
 </div>
